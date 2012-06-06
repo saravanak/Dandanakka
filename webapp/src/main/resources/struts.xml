@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<package name="core" extends="struts-default">
+
+		
+		<action name="*/*/type/*" class="com.dandanakka.web.struts2.action.TypeAction" method="{3}">
+			<result type="freemarker" name="input">/core/type.htm</result>
+			<result type="freemarker" name="list">/core/list_type.htm</result>
+			<result type="redirectAction" name="save">${application}/core/type/list</result>
+		</action>
+		
+		<action name="*/*/schema/*" class="com.dandanakka.web.struts2.action.SchemaAction" method="{3}">
+			<result type="freemarker" name="input">/core/schema.htm</result>
+			<result type="freemarker" name="list">/core/list_schema.htm</result>
+			<result type="redirectAction" name="save">${application}/core/schema/list</result>
+		</action>
+		
+		<action name="*/*/template/*" class="com.dandanakka.web.struts2.action.TemplateAction" method="{3}">
+			<result type="freemarker" name="input">/core/template.htm</result>
+			<result type="freemarker" name="list">/core/list_template.htm</result>
+			<result type="redirectAction" name="save">${application}/core/template/list</result>
+		</action>
+		
+		
+		
+		<action name="*/*/data/*" class="com.dandanakka.web.struts2.action.DataAction" method="{3}">
+			<result type="freemarker" name="input">/core/data.htm</result>
+			<result type="freemarker" name="list">/core/list_data.htm</result>
+			<result type="redirectAction" name="save">${application}/core/data/list</result>
+		</action>
+		
+		
+		<action name="*/*/link/*" class="com.dandanakka.web.struts2.action.LinkAction" method="{3}">
+			<result type="freemarker" name="input">/core/link.htm</result>
+			<result type="freemarker" name="list">/core/list_link.htm</result>
+			<result type="freemarker" name="category">/core/linkcategory.htm</result>
+			<result type="redirectAction" name="save">${application}/core/link/list</result>
+		</action>
+
+
+		<!-- Add actions here -->
+	</package>
+
+
+
+</struts>

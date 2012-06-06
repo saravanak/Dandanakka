@@ -1,0 +1,39 @@
+[#ftl] [#assign content]
+
+<table id="list2"></table>
+<div id="pager2"></div>
+<script type="text/javascript">
+ jQuery("#list2").jqGrid({ url:'${base}/${application}/core/type/search', datatype: "json",
+		colNames:['name','Name','Description'], 
+		colModel:[
+		   		{name:'name',index:'name', hidden: true  ,width:55,editable:false,editoptions:{readonly:true,size:10}} ,
+		   		{name:'name',index:'name', formatter: linkFormatter,width:220,editable:true,editoptions:{size:25}},
+		   		{name:'description',index:'description',width:220,editable:true,editoptions:{size:10}}	
+		   	], 
+		rowNum:10, rowList:[5,10,20,30], 
+		pager: '#pager2', autowidth:true, height:'auto' ,viewrecords: true,  caption:"Type" ,editurl:"${base}/${application}/core/type/delete" });
+
+  jQuery("#list2").jqGrid('navGrid','#pager2',
+		{edit:false,add:false,search:false}, //options 
+		{}, // edit options 
+		{}, // add options 
+		{reloadAfterSubmit:true}, // del options 
+		{} // search options 
+		).navButtonAdd('#pager2',{
+				caption:"",			   
+			   buttonicon:"ui-icon ui-icon-plus", 
+			   onClickButton: function(){ 
+			     window.open('${base}/${application}/core/type/edit','_self');
+			   }, 
+			   position:"first"
+			});  
+
+  function linkFormatter(cellvalue, options, rowObject)
+  {
+     // do something here
+     return '<a href="${base}/${application}/core/type/edit?id='+rowObject[0]+'">'+cellvalue+'</a>';
+  }
+  
+</script> 
+[/#assign] 
+[#include "/layout.htm"]
