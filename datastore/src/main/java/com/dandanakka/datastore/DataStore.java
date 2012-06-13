@@ -33,7 +33,7 @@ public abstract class DataStore {
 		this.application = application;
 	}
 
-	public static DataStore getDataStore(String application)
+	public static DataStore getDataStore(final String application)
 			throws DataStoreException {
 		DataStore dataStore = dataStoreMap.get(application);
 		if (dataStore == null) {
@@ -49,7 +49,8 @@ public abstract class DataStore {
 			} catch (ClassNotFoundException e) {
 				throw new DataStoreException("please check MongoDB instance", e);
 			} catch (IOException e) {
-				throw new DataStoreException("please check config file instance", e);
+				throw new DataStoreException(
+						"please check config file instance", e);
 			}
 		}
 		return dataStore;

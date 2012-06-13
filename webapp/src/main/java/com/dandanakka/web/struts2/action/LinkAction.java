@@ -7,6 +7,7 @@ import com.dandanakka.datastore.model.Operator;
 import com.dandanakka.datastore.model.Query;
 import com.dandanakka.template.model.Link;
 import com.dandanakka.template.model.LinkCategory;
+import com.dandanakka.web.exception.SystemException;
 
 public class LinkAction extends PersistenceAction<Link> {
 
@@ -117,7 +118,7 @@ public class LinkAction extends PersistenceAction<Link> {
 		return "save";
 	}
 
-	private void deleteLink(Link link) throws DataStoreException {
+	private void deleteLink(Link link) throws DataStoreException, SystemException {
 		List<Link> links = link.getLinks();
 		for (Link link2 : links) {
 			deleteLink(link2);

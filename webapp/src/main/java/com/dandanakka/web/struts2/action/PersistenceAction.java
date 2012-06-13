@@ -12,6 +12,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import com.dandanakka.datastore.exception.DataStoreException;
 import com.dandanakka.datastore.model.PaginatedResult;
+import com.dandanakka.web.exception.SystemException;
 
 public abstract class PersistenceAction<T> extends BaseAction {
 
@@ -58,7 +59,7 @@ public abstract class PersistenceAction<T> extends BaseAction {
 
 	public String search() throws DataStoreException, JsonGenerationException,
 			JsonMappingException, IOException, InstantiationException,
-			IllegalAccessException {
+			IllegalAccessException, SystemException {
 		Integer pageNumber = getParameterAsInt("page");
 		Integer pageSize = getParameterAsInt("rows");
 

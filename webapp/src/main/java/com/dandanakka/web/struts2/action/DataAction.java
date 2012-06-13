@@ -1,18 +1,10 @@
 package com.dandanakka.web.struts2.action;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-
-import com.dandanakka.datastore.exception.DataStoreException;
 import com.dandanakka.datastore.model.Attribute;
-import com.dandanakka.datastore.model.PaginatedResult;
 import com.dandanakka.datastore.model.Schema;
 
 public class DataAction extends BaseAction {

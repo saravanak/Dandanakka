@@ -10,6 +10,10 @@ public class Query {
 	public List<Criteria> getCriterias() {
 		return criterias;
 	}
+	
+	public void clearCriterias() {
+		criterias.clear() ;
+	}
 
 	
 	

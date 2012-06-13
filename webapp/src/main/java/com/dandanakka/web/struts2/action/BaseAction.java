@@ -10,7 +10,9 @@ import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.dandanakka.datastore.DataStore;
-import com.dandanakka.datastore.exception.DataStoreException;
+import com.dandanakka.web.exception.SystemException;
+import com.dandanakka.web.manager.ApplicationManager;
+import com.dandanakka.web.model.Context;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -24,23 +26,31 @@ public class BaseAction extends ActionSupport implements ParameterAware,
 
 	private String application;
 
-	private DataStore dataStore;
+	private ApplicationManager applicationManager;
 
 	private Map<String, String[]> params;
 
 	protected HttpServletResponse response;
 
-	protected DataStore getDataStore() throws DataStoreException {
-		if (dataStore == null) {
-			dataStore = DataStore.getDataStore(getApplication());
+	private ApplicationManager getApplicationManager() throws SystemException {
+		if (applicationManager == null) {
+			applicationManager = ApplicationManager
+					.getApplicationManager(getApplication());
 		}
-		return dataStore;
+		return applicationManager;
+	}
+
+	protected DataStore getDataStore() throws SystemException {
+		return getApplicationManager().getDataStore();
+	}
+
+	public Context getContext() throws SystemException {
+		return getApplicationManager().getContext();
 	}
 
 	public String getTheme() {
 		return "basic";
 	}
-	
 
 	public String getApplication() {
 		if (application == null) {
