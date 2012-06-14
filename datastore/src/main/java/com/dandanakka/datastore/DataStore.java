@@ -18,7 +18,6 @@ import com.dandanakka.datastore.model.Operator;
 import com.dandanakka.datastore.model.PaginatedResult;
 import com.dandanakka.datastore.model.Query;
 import com.dandanakka.datastore.model.Reference;
-import com.dandanakka.template.model.Template;
 
 public abstract class DataStore {
 
