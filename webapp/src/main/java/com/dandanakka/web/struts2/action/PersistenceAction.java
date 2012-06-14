@@ -57,16 +57,22 @@ public abstract class PersistenceAction<T> extends BaseAction {
 		return "list";
 	}
 
+	protected PaginatedResult<T> getPaginatedResult(Integer pageNumber,
+			Integer pageSize) throws InstantiationException, IllegalAccessException, DataStoreException, SystemException {
+		return getDataStore().getDataList(getEntityClass().newInstance(),
+				pageNumber, pageSize);
+	}
+
 	public String search() throws DataStoreException, JsonGenerationException,
 			JsonMappingException, IOException, InstantiationException,
 			IllegalAccessException, SystemException {
 		Integer pageNumber = getParameterAsInt("page");
 		Integer pageSize = getParameterAsInt("rows");
 
-		List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
+		PaginatedResult<T> paginatedResult = getPaginatedResult(pageNumber,
+				pageSize);
 
-		PaginatedResult<T> paginatedResult = getDataStore().getDataList(
-				getEntityClass().newInstance(), pageNumber, pageSize);
+		List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		Integer count = paginatedResult.getNoOfRecords();
 		map.put("page", pageNumber);

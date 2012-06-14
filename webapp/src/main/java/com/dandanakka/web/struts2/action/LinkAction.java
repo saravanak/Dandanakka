@@ -16,16 +16,6 @@ public class LinkAction extends PersistenceAction<Link> {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private List<LinkCategory> categories;
-
-	public List<LinkCategory> getCategories() {
-		return categories;
-	}
-
-	public void setCategories(List<LinkCategory> categories) {
-		this.categories = categories;
-	}
-
 	private String category;
 
 	public String getCategory() {
@@ -83,17 +73,19 @@ public class LinkAction extends PersistenceAction<Link> {
 	public String edit() throws Exception {
 		setEntity(getDataStore()
 				.getObject(getEntityClass(), getParameter("id")));
+
 		if (entity == null) {
 			String parentId = getParameter("parentId");
 			setEntity(new Link());
 			getEntity().setParentId(parentId);
 			getEntity().setCategory(category);
+
 		}
 		return input();
 	}
 
 	public String list() throws Exception {
-		setCategories(getDataStore().getDataList(new LinkCategory()));
+		addMaster(LinkCategory.class);
 		String category = getParameter("category");
 		Query query = new Query();
 		query.addCriteria("parentId", Operator.IS_NULL, null);
@@ -104,6 +96,10 @@ public class LinkAction extends PersistenceAction<Link> {
 		}
 		setLinks(getDataStore().getDataList(getEntityClass(), query));
 		return "list";
+	}
+
+	public String actions() throws Exception {
+		return "actions";
 	}
 
 	public String category() throws Exception {
@@ -118,7 +114,8 @@ public class LinkAction extends PersistenceAction<Link> {
 		return "save";
 	}
 
-	private void deleteLink(Link link) throws DataStoreException, SystemException {
+	private void deleteLink(Link link) throws DataStoreException,
+			SystemException {
 		List<Link> links = link.getLinks();
 		for (Link link2 : links) {
 			deleteLink(link2);

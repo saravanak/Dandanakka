@@ -1,9 +1,28 @@
 [#ftl] [#assign content]
 
+<div style="text-align: right;">	
+[@s.select name="category" list="TemplateCategorys" listKey='name' listValue='label' theme="simple"/]
+<a href="${base}/${application}/core/template/category">Add</a>
+</div>
+
 <table id="list2"></table>
 <div id="pager2"></div>
 <script type="text/javascript">
- jQuery("#list2").jqGrid({ url:'${base}/${application}/core/template/search', datatype: "json",
+
+function getCategory() {
+	var category = $('#category option:selected').val();
+	if(category != -1) {
+		category = '&category='+category ;
+	}
+	else {
+		category = '' ;
+	}
+	return category ;
+}
+
+$("#category").change(function() { window.open ("${base}/${application}/core/template/list?"+getCategory(),"_self"); });
+
+ jQuery("#list2").jqGrid({ url:'${base}/${application}/core/template/search?'+getCategory(), datatype: "json",
 		colNames:['name','Name','Description'], 
 		colModel:[
 		   		{name:'name',index:'name', hidden: true  ,width:55,editable:false,editoptions:{readonly:true,size:10}} ,
@@ -23,7 +42,7 @@
 				caption:"",			   
 			   buttonicon:"ui-icon ui-icon-plus", 
 			   onClickButton: function(){ 
-			     window.open('${base}/${application}/core/template/edit','_self');
+			     window.open('${base}/${application}/core/template/edit?'+getCategory(),'_self');
 			   }, 
 			   position:"first"
 			});  

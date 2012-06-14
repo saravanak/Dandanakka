@@ -18,6 +18,7 @@ import com.dandanakka.datastore.model.Operator;
 import com.dandanakka.datastore.model.PaginatedResult;
 import com.dandanakka.datastore.model.Query;
 import com.dandanakka.datastore.model.Reference;
+import com.dandanakka.template.model.Template;
 
 public abstract class DataStore {
 
@@ -281,4 +282,11 @@ public abstract class DataStore {
 			throws DataStoreException;
 
 	protected abstract String getIdColumnName();
+
+	public <T> PaginatedResult<T> getDataList(Class<T> entityClass,
+			Query query, Integer pageNumber, Integer pageSize)
+			throws DataStoreException {
+		return getDataList(getSchemaName(entityClass), query, pageNumber,
+				pageSize);
+	}
 }

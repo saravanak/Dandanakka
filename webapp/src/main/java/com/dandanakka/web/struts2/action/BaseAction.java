@@ -1,8 +1,10 @@
 package com.dandanakka.web.struts2.action;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.util.Map;
+import java.util.zip.Inflater;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,11 +12,13 @@ import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.dandanakka.datastore.DataStore;
+import com.dandanakka.datastore.exception.DataStoreException;
 import com.dandanakka.web.exception.SystemException;
 import com.dandanakka.web.manager.ApplicationManager;
 import com.dandanakka.web.model.Context;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import static org.jvnet.inflector.Noun.pluralOf;
 
 public class BaseAction extends ActionSupport implements ParameterAware,
 		ServletResponseAware {
@@ -92,6 +96,29 @@ public class BaseAction extends ActionSupport implements ParameterAware,
 		writer.write(content);
 		writer.close();
 		return null;
+	}
+
+	protected void addMaster(Class clazz) throws InstantiationException,
+			IllegalAccessException, DataStoreException, SystemException {
+
+		ActionContext
+				.getContext()
+				.getValueStack()
+				.set(getPlural(clazz),
+						getDataStore().getDataList(clazz.newInstance()));
+	}
+
+	private String getName(Class clazz) {
+		String name = clazz.getName();
+		int indexOfDot = -1;
+		if ((indexOfDot = name.lastIndexOf('.')) != -1) {
+			name = name.substring(indexOfDot + 1);
+		}
+		return name;
+	}
+
+	private String getPlural(Class clazz) {
+		return pluralOf(getName(clazz));
 	}
 
 }
