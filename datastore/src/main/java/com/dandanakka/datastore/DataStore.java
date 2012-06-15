@@ -108,8 +108,10 @@ public abstract class DataStore {
 
 	public Map<String, Object> getDataMap(Object data) {
 		Map<String, Object> dataMap = null;
+
 		ObjectMapper m = new ObjectMapper();
 		dataMap = m.convertValue(data, Map.class);
+
 		return dataMap;
 	}
 
@@ -229,6 +231,22 @@ public abstract class DataStore {
 		return paginatedResult;
 	}
 
+	public void saveData(String schemaName, Map<String, Object> dataMap)
+			throws DataStoreException {
+
+		String idName = getIdColumnName();
+		Object idValue = dataMap.get(idName);
+		dataMap.remove(idName);
+
+		if (idValue == null || idValue.toString().trim().length() == 0) {
+			createData(schemaName, dataMap);
+		} else {
+			dataMap.put(getIdColumnName(), idValue);
+			updateData(schemaName, dataMap);
+		}
+
+	}
+
 	public void saveData(Object data) throws DataStoreException {
 		if (data != null) {
 			Map<String, Object> dataMap = getDataMap(data);
@@ -280,7 +298,7 @@ public abstract class DataStore {
 	public abstract boolean deleteData(String schemaName, String id)
 			throws DataStoreException;
 
-	protected abstract String getIdColumnName();
+	public abstract String getIdColumnName();
 
 	public <T> PaginatedResult<T> getDataList(Class<T> entityClass,
 			Query query, Integer pageNumber, Integer pageSize)

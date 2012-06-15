@@ -2,7 +2,8 @@
 
 [#assign content]
 [@s.form action="submit"] 
-[@s.hidden name="sId" key="id"/]
+[@s.hidden name="entity.${idColumnName}"/]
+[@s.hidden name="schema.name"/]
 
 [#list schema.attributes as attribute]
 	[@component attribute=attribute/]
@@ -15,8 +16,8 @@
 
 [#macro component attribute]
 	[#if attribute.type == 'text']
-		[@s.textfield name="data.${attribute.name}" key="${attribute.name}"/]
+		[@s.textfield name="entity.${attribute.name}" key="${attribute.name}"/]
 	[#elseif attribute.type == 'textarea']
-		[@s.textarea name="data.${attribute.name}" key="${attribute.name}"/]
+		[@s.textarea name="entity.${attribute.name}" key="${attribute.name}"/]
 	[/#if]
 [/#macro]
