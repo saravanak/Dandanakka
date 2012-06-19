@@ -44,6 +44,10 @@ public class TemplateAction extends PersistenceAction<Template> {
 		addMaster(TemplateCategory.class);
 		return super.list();
 	}
+	
+	public String select() throws Exception {		
+		return "select";
+	}
 
 	public String edit() throws Exception {
 		setEntity(getDataStore()

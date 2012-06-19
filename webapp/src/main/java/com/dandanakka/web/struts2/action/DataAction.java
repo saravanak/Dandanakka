@@ -13,6 +13,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.dandanakka.datastore.exception.DataStoreException;
 import com.dandanakka.datastore.model.PaginatedResult;
 import com.dandanakka.datastore.model.Schema;
+import com.dandanakka.template.model.Template;
 import com.dandanakka.web.exception.SystemException;
 
 public class DataAction extends BaseAction {
@@ -23,6 +24,16 @@ public class DataAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 
 	protected Map<String, Object> entity;
+
+	private Object mapObj;
+
+	public Object getMapObj() {
+		return mapObj;
+	}
+
+	public void setMapObj(Object mapObj) {
+		this.mapObj = mapObj;
+	}
 
 	private Schema schema;
 
@@ -37,9 +48,9 @@ public class DataAction extends BaseAction {
 	public Map<String, Object> getEntity() {
 		return entity;
 	}
-	
+
 	public String getIdColumnName() throws SystemException {
-		return getDataStore().getIdColumnName() ;
+		return getDataStore().getIdColumnName();
 	}
 
 	public void setEntity(Map<String, Object> entity) {
@@ -47,13 +58,29 @@ public class DataAction extends BaseAction {
 	}
 
 	public String edit() throws Exception {
-		setSchema(getDataStore().getObject(Schema.class, getParameter("sId")));
-		setEntity(getDataStore().getDataMap(getParameter("sId"),
-				getParameter("id")));
+		String schemaName = null;
+		String dataId = getParameter("id");
+		String templateName = getParameter("tId");
+		if (templateName != null) {
+			Template template = getDataStore().getObject(Template.class,
+					templateName);
+			if (template != null) {
+				schemaName = template.getSchema() ;
+			}
+		}
+		else {
+			schemaName = getParameter("sId") ;
+		}
+		setSchema(getDataStore().getObject(Schema.class, schemaName));
+		if (dataId != null) {
+			setEntity(getDataStore().getDataMap(schemaName, dataId));
+		}
+
 		return input();
 	}
 
 	protected String save() throws Exception {
+		processEntity(entity);
 		getDataStore().saveData(getSchema().getName(), entity);
 		return "save";
 	}
@@ -106,13 +133,10 @@ public class DataAction extends BaseAction {
 			for (String key : resultMap.keySet()) {
 				if (key.equals(idColumnName)) {
 					cell.add(resultMap.get(key).toString());
-				}
-				else {
+				} else {
 					cell.add(resultMap.get(key));
 				}
-
 			}
-
 			row.put("cell", cell);
 			rows.add(row);
 		}
@@ -120,4 +144,30 @@ public class DataAction extends BaseAction {
 		ObjectMapper mapper = new ObjectMapper();
 		return getJSONResponse(mapper.writeValueAsString(map));
 	}
+
+	private void processEntity(Map<String, Object> map) {
+		if (map != null) {
+			Object value = null;
+			for (String key : map.keySet()) {
+				value = map.get(key);
+				if (isArray(value)) {
+					map.put(key, getConvertedValue(key, ((Object[]) value)[0]));
+				}
+			}
+		}
+	}
+
+	private Object getConvertedValue(String key, Object object) {
+		// TODO Auto-generated method stub
+		return object.toString();
+	}
+
+	private boolean isArray(final Object obj) {
+		return obj instanceof Object[] || obj instanceof boolean[]
+				|| obj instanceof byte[] || obj instanceof short[]
+				|| obj instanceof char[] || obj instanceof int[]
+				|| obj instanceof long[] || obj instanceof float[]
+				|| obj instanceof double[];
+	}
+
 }

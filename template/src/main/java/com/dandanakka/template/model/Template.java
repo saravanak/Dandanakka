@@ -9,6 +9,7 @@ public class Template {
 	private String category;
 	private String description;
 	private String template;
+	private String schema;
 
 	public String getName() {
 		return name;
@@ -48,6 +49,14 @@ public class Template {
 
 	public void setTemplate(String template) {
 		this.template = template;
+	}
+
+	public String getSchema() {
+		return schema;
+	}
+
+	public void setSchema(String schema) {
+		this.schema = schema;
 	}
 
 }

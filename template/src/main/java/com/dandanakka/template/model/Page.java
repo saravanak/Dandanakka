@@ -1,7 +1,10 @@
 package com.dandanakka.template.model;
 
+import com.dandanakka.datastore.model.Id;
+
 public class Page {
 
+	@Id(auto=false)
 	private String name;
 	private String label;
 	private String templateName;

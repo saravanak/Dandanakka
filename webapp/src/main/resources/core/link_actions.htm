@@ -1,7 +1,7 @@
 [#ftl] 
 
 [#assign content]
-<a href="">Create Page</a>
+<a href="${base}/${application}/core/template/select?category=page[#if Parameters.lId?exists]&lId=${Parameters.lId}[/#if]">Create Page</a>
 <a href="">Link Page</a>
 [/#assign] 
 [#include "/layout.htm"]

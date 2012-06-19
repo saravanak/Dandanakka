@@ -140,7 +140,7 @@
 		<ul>
 		[#list links as link]
 			
-			<li id="${link.id}" [#if link.links?? && link.links?size >0]class="jstree-open"[/#if]><a href="[#if link.url??]${link.url}[#else]${base}/${application}/core/link/actions[/#if]">${link.label}</a>
+			<li id="${link.id}" [#if link.links?? && link.links?size >0]class="jstree-open"[/#if]><a href="[#if link.url??]${link.url}[#else]${base}/${application}/core/link/actions?lId=${link.id}[/#if]">${link.label}</a>
 			[#if link.links??]
 			[@tree link.links/]
 			[/#if]

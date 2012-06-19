@@ -4,7 +4,7 @@
 [@s.form action="submit"] 
 [@s.hidden name="entity.${idColumnName}"/]
 [@s.hidden name="schema.name"/]
-
+[@s.checkbox name="mapObj" key="mapObj"/]
 [#list schema.attributes as attribute]
 	[@component attribute=attribute/]
 [/#list]
