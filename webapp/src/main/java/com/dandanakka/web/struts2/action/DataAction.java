@@ -25,6 +25,34 @@ public class DataAction extends BaseAction {
 
 	protected Map<String, Object> entity;
 
+	private String template;
+	private String link;
+	private String dataId;
+
+	public String getDataId() {
+		return dataId;
+	}
+
+	public void setDataId(String dataId) {
+		this.dataId = dataId;
+	}
+
+	public String getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(String template) {
+		this.template = template;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
 	private Object mapObj;
 
 	public Object getMapObj() {
@@ -60,16 +88,16 @@ public class DataAction extends BaseAction {
 	public String edit() throws Exception {
 		String schemaName = null;
 		String dataId = getParameter("id");
-		String templateName = getParameter("tId");
-		if (templateName != null) {
-			Template template = getDataStore().getObject(Template.class,
-					templateName);
-			if (template != null) {
-				schemaName = template.getSchema() ;
+		setTemplate(getParameter("tId"));
+		setLink(getParameter("lId"));
+		if (template != null) {
+			Template templateObj = getDataStore().getObject(Template.class,
+					template);
+			if (templateObj != null) {
+				schemaName = templateObj.getSchema();
 			}
-		}
-		else {
-			schemaName = getParameter("sId") ;
+		} else {
+			schemaName = getParameter("sId");
 		}
 		setSchema(getDataStore().getObject(Schema.class, schemaName));
 		if (dataId != null) {
@@ -81,7 +109,10 @@ public class DataAction extends BaseAction {
 
 	protected String save() throws Exception {
 		processEntity(entity);
-		getDataStore().saveData(getSchema().getName(), entity);
+		setDataId(getDataStore().saveData(getSchema().getName(), entity));
+		if (link != null && link.trim().length() != 0) {
+			return "page";
+		}
 		return "save";
 	}
 

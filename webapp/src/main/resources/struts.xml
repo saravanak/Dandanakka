@@ -28,7 +28,12 @@
 			method="{3}">
 			<result type="freemarker" name="input">/core/page.htm</result>
 			<result type="freemarker" name="list">/core/list_page.htm</result>
-			<result type="redirectAction" name="save">${application}/core/page/list
+			<result type="freemarker" name="view">/core/view_page.htm</result>
+			<result type="redirectAction" name="save">
+				<param name="actionName">view</param>
+				<param name="namespace">${application}/core/page</param>
+				<param name="pName">${entity.name}</param>
+
 			</result>
 		</action>
 
@@ -40,6 +45,13 @@
 			<result type="freemarker" name="input">/core/data.htm</result>
 			<result type="freemarker" name="list">/core/list_data.htm</result>
 			<result type="redirectAction" name="save">${application}/core/data/list
+			</result>
+			<result type="redirectAction" name="page">
+				<param name="actionName">edit</param>
+				<param name="namespace">${application}/core/page</param>
+				<param name="template">${template}</param>
+				<param name="link">${link}</param>
+				<param name="dataId">${dataId}</param>
 			</result>
 		</action>
 
@@ -61,7 +73,8 @@
 			</result>
 			<result type="freemarker" name="select">/core/select_template.htm
 			</result>
-			<result type="freemarker" name="category">/core/templatecategory.htm</result>
+			<result type="freemarker" name="category">/core/templatecategory.htm
+			</result>
 			<result type="redirectAction" name="save">${application}/core/template/list
 			</result>
 		</action>

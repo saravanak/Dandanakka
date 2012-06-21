@@ -231,20 +231,20 @@ public abstract class DataStore {
 		return paginatedResult;
 	}
 
-	public void saveData(String schemaName, Map<String, Object> dataMap)
+	public String saveData(String schemaName, Map<String, Object> dataMap)
 			throws DataStoreException {
-
+		String generatedId = null;
 		String idName = getIdColumnName();
 		Object idValue = dataMap.get(idName);
 		dataMap.remove(idName);
 
 		if (idValue == null || idValue.toString().trim().length() == 0) {
-			createData(schemaName, dataMap);
+			generatedId = createData(schemaName, dataMap);
 		} else {
 			dataMap.put(getIdColumnName(), idValue);
 			updateData(schemaName, dataMap);
 		}
-
+		return generatedId;
 	}
 
 	public void saveData(Object data) throws DataStoreException {

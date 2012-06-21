@@ -10,10 +10,10 @@ public class TemplateLoader extends StringTemplateLoader {
 	@Override
 	public Object findTemplateSource(String name) {
 		Object source = super.findTemplateSource(name) ;		
-		if(name.startsWith("$$") && source == null ) {
+		if(name.indexOf("$$") != -1 && source == null ) {
 			int lastIndexofDoller = name.lastIndexOf("$$") ;
 			try {
-				Template template = DataStore.getDataStore(name.substring(2,lastIndexofDoller)).getObject(Template.class, name.substring(lastIndexofDoller+3)) ;
+				Template template = DataStore.getDataStore(name.substring(name.indexOf("$$")+2,lastIndexofDoller)).getObject(Template.class, name.substring(lastIndexofDoller+3)) ;
 				if(template != null) {
 					this.putTemplate(name, template.getTemplate()) ;
 				}
