@@ -52,6 +52,10 @@ public class BaseAction extends ActionSupport implements ParameterAware,
 		return getApplicationManager().getContext();
 	}
 
+	public void loadContext() throws SystemException, DataStoreException {
+		getApplicationManager().loadContext();
+	}
+
 	public String getTheme() {
 		return "basic";
 	}

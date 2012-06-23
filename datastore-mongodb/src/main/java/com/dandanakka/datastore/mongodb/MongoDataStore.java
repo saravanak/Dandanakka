@@ -18,6 +18,7 @@ import com.dandanakka.datastore.model.Query;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 import com.mongodb.QueryBuilder;
@@ -59,11 +60,17 @@ public class MongoDataStore extends DataStore {
 			throws DataStoreException {
 
 		DB db = getMongoDB();
-		BasicDBObject dbObject = new BasicDBObject(data);
+		BasicDBObject queryObject = new BasicDBObject("_id", getIdValue(data
+				.get(getIdColumnName()).toString()));
+		DBObject dbObject = db.getCollection(schemaName).findOne(queryObject);
+		if (dbObject == null) {
+			dbObject = new BasicDBObject(data);
+		} else {
+			dbObject.putAll(data);
+		}
 		dbObject.put(getIdColumnName(),
 				getIdValue(dbObject.get(getIdColumnName()).toString()));
-		BasicDBObject queryObject = new BasicDBObject("_id",
-				getIdValue(dbObject.get(getIdColumnName()).toString()));
+
 		WriteResult result = db.getCollection(schemaName).update(queryObject,
 				dbObject);
 

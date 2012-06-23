@@ -30,7 +30,7 @@ public class ApplicationManager {
 
 	}
 
-	private void loadContext() throws DataStoreException {
+	public void loadContext() throws DataStoreException {
 		context = new Context();
 
 		Map<String, List<Link>> links = new HashMap<String, List<Link>>();

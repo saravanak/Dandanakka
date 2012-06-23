@@ -40,7 +40,7 @@ public abstract class PersistenceAction<T> extends BaseAction {
 	}
 
 	protected String save() throws Exception {
-		getDataStore().saveData(entity);
+		getDataStore().saveData(entity,true);
 		return "save";
 	}
 

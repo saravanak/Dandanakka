@@ -2,6 +2,7 @@ package com.dandanakka.web.struts2.action;
 
 import java.util.Map;
 
+import com.dandanakka.template.model.Link;
 import com.dandanakka.template.model.Page;
 import com.dandanakka.template.model.Template;
 
@@ -52,6 +53,19 @@ public class PageAction extends PersistenceAction<Page> {
 			entity.setDataId(getParameter("dataId"));
 			entity.setTemplateName(getParameter("template"));
 			setLink(getParameter("link"));
+		}
+		return result;
+	}
+
+	@Override
+	protected String save() throws Exception {
+		String result = super.save();
+		if (link != null && link.trim().length() != 0) {
+			Link linkToUpdate = new Link();
+			linkToUpdate.setId(link);
+			linkToUpdate.setPage(entity.getName());
+			getDataStore().saveData(linkToUpdate, true);
+			loadContext();
 		}
 		return result;
 	}

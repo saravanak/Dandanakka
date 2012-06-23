@@ -14,6 +14,15 @@ public class Link {
 	private String url;
 	private String description;
 	private String category;
+	private String page;
+
+	public String getPage() {
+		return page;
+	}
+
+	public void setPage(String page) {
+		this.page = page;
+	}
 
 	@Reference(targetAtribute = "parentId", targetSchema = Link.class)
 	private List<Link> links;

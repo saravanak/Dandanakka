@@ -247,16 +247,25 @@ public abstract class DataStore {
 		return generatedId;
 	}
 
-	public void saveData(Object data) throws DataStoreException {
+	public String saveData(Object data) throws DataStoreException {
+		return saveData(data, false);
+	}
+
+	public String saveData(Object data, boolean withoutNull)
+			throws DataStoreException {
+		String returnValue = null ;
 		if (data != null) {
 			Map<String, Object> dataMap = getDataMap(data);
 			Field idField = getIdColumn(data.getClass());
 			String idName = idField.getName();
 			Object idValue = dataMap.get(idName);
 			dataMap.remove(idName);
+			if (withoutNull) {
+				removeNullValues(dataMap);
+			}
 			if (idField.getAnnotation(Id.class).auto()) {
 				if (idValue == null || idValue.toString().trim().length() == 0) {
-					createData(getSchemaName(data.getClass()), dataMap);
+					returnValue = createData(getSchemaName(data.getClass()), dataMap);
 				} else {
 					dataMap.put(getIdColumnName(), idValue);
 					updateData(getSchemaName(data.getClass()), dataMap);
@@ -264,11 +273,17 @@ public abstract class DataStore {
 			} else {
 				dataMap.put(getIdColumnName(), idValue);
 				if (updateData(getSchemaName(data.getClass()), dataMap) == 0) {
-					createData(getSchemaName(data.getClass()), dataMap);
+					returnValue = createData(getSchemaName(data.getClass()), dataMap);
 				}
 
 			}
+			if(returnValue == null) {
+				returnValue = idValue.toString() ;
+			}
+			
 		}
+		
+		return returnValue;
 	}
 
 	public boolean deleteData(Class schemaClass, String id)
