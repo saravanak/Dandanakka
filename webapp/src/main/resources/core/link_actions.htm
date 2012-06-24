@@ -2,6 +2,6 @@
 
 [#assign content]
 <a href="${base}/${application}/core/template/select?category=page[#if Parameters.lId?exists]&lId=${Parameters.lId}[/#if]">Create Page</a>
-<a href="">Link Page</a>
+<a href="${base}/${application}/core/page/list?[#if Parameters.lId?exists]link=${Parameters.lId}[/#if]">Link Page</a>
 [/#assign] 
 [#include "/layout.htm"]

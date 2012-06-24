@@ -30,8 +30,12 @@
 
   function linkFormatter(cellvalue, options, rowObject)
   {
-     // do something here
-     return '<a href="${base}/${application}/core/page/edit?id='+rowObject[0]+'">'+cellvalue+'</a>';
+	 [#if link??]
+	 return '<a href="${base}/${application}/core/page/link?link=${link}&pName='+rowObject[0]+'">'+cellvalue+'</a>';
+	 [#else]
+	 return '<a href="${base}/${application}/core/page/edit?id='+rowObject[0]+'">'+cellvalue+'</a>';
+	 [/#if]
+     
   }
   
 </script> 

@@ -69,6 +69,24 @@ public class PageAction extends PersistenceAction<Page> {
 		}
 		return result;
 	}
+	
+	public String link() throws Exception {
+		setLink(getParameter("link"));
+		if (link != null && link.trim().length() != 0) {
+			Link linkToUpdate = new Link();
+			linkToUpdate.setId(link);
+			linkToUpdate.setPage(getParameter("pName"));
+			getDataStore().saveData(linkToUpdate, true);
+			loadContext();
+		}
+		return view() ;
+	}
+	
+	@Override
+	public String list() throws Exception {
+		setLink(getParameter("link"));
+		return super.list();
+	}
 
 	public String view() throws Exception {
 		setEntity(getDataStore().getObject(Page.class, getParameter("pName")));
