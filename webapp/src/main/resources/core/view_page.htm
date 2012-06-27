@@ -2,5 +2,10 @@
 [#assign content]
 [#assign root = data/]
 [#include "$$${application}$$/${entity.templateName}"]
-[/#assign] 
+[/#assign]
+
+[#if entity.fullScreen]
+${content}
+[#else] 
 [#include "/layout.htm"]
+[/#if]

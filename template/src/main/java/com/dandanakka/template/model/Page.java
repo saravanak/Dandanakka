@@ -4,11 +4,20 @@ import com.dandanakka.datastore.model.Id;
 
 public class Page {
 
-	@Id(auto=false)
+	@Id(auto = false)
 	private String name;
 	private String label;
 	private String templateName;
 	private String dataId;
+	private boolean fullScreen;
+
+	public boolean isFullScreen() {
+		return fullScreen;
+	}
+
+	public void setFullScreen(boolean fullScreen) {
+		this.fullScreen = fullScreen;
+	}
 
 	public String getName() {
 		return name;
