@@ -19,6 +19,14 @@
 			</result>
 		</action>
 
+
+		<action name="*/*/locale/*" class="com.dandanakka.web.struts2.action.LocaleAction"
+			method="{3}">
+			<result type="freemarker" name="input">/core/locale.htm</result>
+			<result type="freemarker" name="list">/core/list_locale.htm</result>
+			<result type="redirectAction" name="save">${application}/core/locale/list
+			</result>
+		</action>
 		<action name="*/*/schema/*" class="com.dandanakka.web.struts2.action.SchemaAction"
 			method="{3}">
 			<result type="freemarker" name="input">/core/schema.htm</result>

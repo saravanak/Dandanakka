@@ -96,6 +96,7 @@ public class BaseAction extends ActionSupport implements ParameterAware,
 
 	protected String getJSONResponse(String content) throws IOException {
 		response.setContentType("json");
+		response.setCharacterEncoding("UTF-8");
 		PrintWriter writer = response.getWriter();
 		writer.write(content);
 		writer.close();
