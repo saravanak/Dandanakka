@@ -35,12 +35,12 @@ public abstract class PersistenceAction<T> extends BaseAction {
 
 	public String edit() throws Exception {
 		setEntity(getDataStore()
-				.getObject(getEntityClass(), getParameter("id")));
+				.getObject(getEntityClass(), getParameter("id"),getLanguage()));
 		return input();
 	}
 
 	protected String save() throws Exception {
-		getDataStore().saveData(entity,true);
+		getDataStore().saveObject(entity,getLanguage(),true);
 		return "save";
 	}
 
@@ -59,7 +59,7 @@ public abstract class PersistenceAction<T> extends BaseAction {
 
 	protected PaginatedResult<T> getPaginatedResult(Integer pageNumber,
 			Integer pageSize) throws InstantiationException, IllegalAccessException, DataStoreException, SystemException {
-		return getDataStore().getDataList(getEntityClass().newInstance(),
+		return getDataStore().getDataList(getEntityClass().newInstance(),getLanguage(),
 				pageNumber, pageSize);
 	}
 

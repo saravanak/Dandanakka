@@ -63,7 +63,7 @@ public class LinkAction extends PersistenceAction<Link> {
 			returnValue = super.save();
 			;
 		} else {
-			getDataStore().saveData(linkCategory);
+			getDataStore().saveObject(linkCategory);
 			returnValue = "save";
 		}
 
@@ -94,7 +94,7 @@ public class LinkAction extends PersistenceAction<Link> {
 		} else {
 			query.addCriteria("category", Operator.EQUALS, category);
 		}
-		setLinks(getDataStore().getDataList(getEntityClass(), query));
+		setLinks(getDataStore().getDataList(getEntityClass(), query,getLanguage()));
 		return "list";
 	}
 

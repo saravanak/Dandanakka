@@ -64,7 +64,7 @@ public class PageAction extends PersistenceAction<Page> {
 			Link linkToUpdate = new Link();
 			linkToUpdate.setId(link);
 			linkToUpdate.setPage(entity.getName());
-			getDataStore().saveData(linkToUpdate, true);
+			getDataStore().saveObject(linkToUpdate, true);
 			loadContext();
 		}
 		return result;
@@ -76,7 +76,7 @@ public class PageAction extends PersistenceAction<Page> {
 			Link linkToUpdate = new Link();
 			linkToUpdate.setId(link);
 			linkToUpdate.setPage(getParameter("pName"));
-			getDataStore().saveData(linkToUpdate, true);
+			getDataStore().saveObject(linkToUpdate, true);
 			loadContext();
 		}
 		return view() ;

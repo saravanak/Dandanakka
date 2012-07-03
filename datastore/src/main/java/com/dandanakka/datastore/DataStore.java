@@ -14,10 +14,13 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.dandanakka.core.util.ConfigUtil;
 import com.dandanakka.datastore.exception.DataStoreException;
 import com.dandanakka.datastore.model.Id;
+import com.dandanakka.datastore.model.LocaleSpecific;
 import com.dandanakka.datastore.model.Operator;
 import com.dandanakka.datastore.model.PaginatedResult;
 import com.dandanakka.datastore.model.Query;
 import com.dandanakka.datastore.model.Reference;
+import com.dandanakka.template.model.Link;
+import com.dandanakka.template.model.Page;
 
 public abstract class DataStore {
 
@@ -71,9 +74,14 @@ public abstract class DataStore {
 	}
 
 	public <T> T getObject(Class<T> clazz, String id) throws DataStoreException {
+		return getObject(clazz, id, null);
+	}
+
+	public <T> T getObject(Class<T> clazz, String id, String locale)
+			throws DataStoreException {
 		T obj = null;
 		Map<String, Object> dataMap = getDataMap(getSchemaName(clazz), id);
-		obj = getObject(clazz, dataMap);
+		obj = getObject(clazz, dataMap, locale);
 		return obj;
 	}
 
@@ -107,16 +115,28 @@ public abstract class DataStore {
 	}
 
 	public Map<String, Object> getDataMap(Object data) {
+		return getDataMap(data, null);
+	}
+
+	public Map<String, Object> getDataMap(Object data, String locale) {
 		Map<String, Object> dataMap = null;
 
 		ObjectMapper m = new ObjectMapper();
 		dataMap = m.convertValue(data, Map.class);
 
+		if (locale != null) {
+			Field[] fields = getLocaleSpecificFields(data.getClass());
+			for (Field field : fields) {
+				dataMap.put(field.getName() + "_" + locale,
+						dataMap.remove(field.getName()));
+			}
+		}
+
 		return dataMap;
 	}
 
-	private <T> T getObject(Class<T> clazz, Map<String, Object> dataMap)
-			throws DataStoreException {
+	private <T> T getObject(Class<T> clazz, Map<String, Object> dataMap,
+			String locale) throws DataStoreException {
 		T obj = null;
 		if (dataMap != null) {
 
@@ -136,7 +156,20 @@ public abstract class DataStore {
 						dataMap.get(idAttributeName));
 
 				dataMap.put(field.getName(),
-						getDataList(reference.targetSchema(), query));
+						getDataList(reference.targetSchema(), query, locale));
+			}
+
+			// Set Locale Specific Fields
+
+			String localemarker = "_" + locale;
+			Object[] keys = dataMap.keySet().toArray() ;
+			for (Object key : keys) {
+				if (key.toString().indexOf(localemarker) != -1) {
+					Object value = dataMap.remove(key);
+					dataMap.put(key.toString().replaceAll(localemarker, ""), value);
+				} else if (key.toString().indexOf('_') != -1) {
+					dataMap.remove(key);
+				}
 			}
 
 			obj = m.convertValue(dataMap, clazz);
@@ -161,6 +194,19 @@ public abstract class DataStore {
 
 	public <T> List<T> getDataList(Class<T> clazz, Query query)
 			throws DataStoreException {
+
+		return getDataList(clazz, query, null);
+	}
+
+	public <T> List<T> getDataList(Class<T> clazz) throws DataStoreException {
+		return getDataList(clazz, (Query) null, (String) null);
+	}
+	public <T> List<T> getDataList(Class<T> clazz, String locale) throws DataStoreException {
+		return getDataList(clazz, (Query) null, locale);
+	}
+
+	public <T> List<T> getDataList(Class<T> clazz, Query query, String locale)
+			throws DataStoreException {
 		PaginatedResult<T> paginatedResult = null;
 		List<T> list = null;
 
@@ -172,7 +218,7 @@ public abstract class DataStore {
 			if (mapList != null) {
 				list = new ArrayList<T>(mapList.size());
 				for (Map<String, Object> map : mapList) {
-					list.add((T) getObject(clazz, map));
+					list.add((T) getObject(clazz, map, locale));
 				}
 			}
 			paginatedResult.setResults(list);
@@ -182,9 +228,15 @@ public abstract class DataStore {
 	}
 
 	public <T> List<T> getDataList(T data) throws DataStoreException {
+		return getDataList(data, null);
+
+	}
+
+	public <T> List<T> getDataList(T data, String locale)
+			throws DataStoreException {
 		PaginatedResult<T> paginatedResult = null;
 		List<T> list = null;
-		Map<String, Object> query = getDataMap(data);
+		Map<String, Object> query = getDataMap(data, locale);
 		removeNullValues(query);
 
 		paginatedResult = getDataList(getSchemaName(data.getClass()), query,
@@ -196,7 +248,7 @@ public abstract class DataStore {
 			if (mapList != null) {
 				list = new ArrayList<T>(mapList.size());
 				for (Map<String, Object> map : mapList) {
-					list.add((T) getObject(data.getClass(), map));
+					list.add((T) getObject(data.getClass(), map, locale));
 				}
 			}
 			paginatedResult.setResults(list);
@@ -207,10 +259,15 @@ public abstract class DataStore {
 
 	public <T> PaginatedResult<T> getDataList(T data, int pageNumber,
 			int pageSize) throws DataStoreException {
+		return getDataList(data, null, pageNumber, pageSize);
+	}
+
+	public <T> PaginatedResult<T> getDataList(T data, String locale,
+			int pageNumber, int pageSize) throws DataStoreException {
 
 		PaginatedResult<T> paginatedResult = null;
 		List<T> list = null;
-		Map<String, Object> query = getDataMap(data);
+		Map<String, Object> query = getDataMap(data, locale);
 		removeNullValues(query);
 
 		paginatedResult = getDataList(getSchemaName(data.getClass()), query,
@@ -222,7 +279,7 @@ public abstract class DataStore {
 			if (mapList != null) {
 				list = new ArrayList<T>(mapList.size());
 				for (Map<String, Object> map : mapList) {
-					list.add((T) getObject(data.getClass(), map));
+					list.add((T) getObject(data.getClass(), map, locale));
 				}
 			}
 			paginatedResult.setResults(list);
@@ -247,15 +304,25 @@ public abstract class DataStore {
 		return generatedId;
 	}
 
-	public String saveData(Object data) throws DataStoreException {
-		return saveData(data, false);
+	public String saveObject(Object data) throws DataStoreException {
+		return saveObject(data, null, false);
 	}
 
-	public String saveData(Object data, boolean withoutNull)
+	public String saveObject(Object data, String locale)
 			throws DataStoreException {
-		String returnValue = null ;
+		return saveObject(data, locale, false);
+	}
+
+	public String saveObject(Object data, boolean withoutNull)
+			throws DataStoreException {
+		return saveObject(data, null, withoutNull);
+	}
+
+	public String saveObject(Object data, String locale, boolean withoutNull)
+			throws DataStoreException {
+		String returnValue = null;
 		if (data != null) {
-			Map<String, Object> dataMap = getDataMap(data);
+			Map<String, Object> dataMap = getDataMap(data, locale);
 			Field idField = getIdColumn(data.getClass());
 			String idName = idField.getName();
 			Object idValue = dataMap.get(idName);
@@ -265,7 +332,8 @@ public abstract class DataStore {
 			}
 			if (idField.getAnnotation(Id.class).auto()) {
 				if (idValue == null || idValue.toString().trim().length() == 0) {
-					returnValue = createData(getSchemaName(data.getClass()), dataMap);
+					returnValue = createData(getSchemaName(data.getClass()),
+							dataMap);
 				} else {
 					dataMap.put(getIdColumnName(), idValue);
 					updateData(getSchemaName(data.getClass()), dataMap);
@@ -273,22 +341,38 @@ public abstract class DataStore {
 			} else {
 				dataMap.put(getIdColumnName(), idValue);
 				if (updateData(getSchemaName(data.getClass()), dataMap) == 0) {
-					returnValue = createData(getSchemaName(data.getClass()), dataMap);
+					returnValue = createData(getSchemaName(data.getClass()),
+							dataMap);
 				}
 
 			}
-			if(returnValue == null) {
-				returnValue = idValue.toString() ;
+			if (returnValue == null) {
+				returnValue = idValue.toString();
 			}
-			
+
 		}
-		
+
 		return returnValue;
 	}
 
 	public boolean deleteData(Class schemaClass, String id)
 			throws DataStoreException {
 		return deleteData(getSchemaName(schemaClass), id);
+	}
+
+	public Field[] getLocaleSpecificFields(Class clazz) {
+		List<Field> fields = new ArrayList<Field>();
+		for (Field field : clazz.getDeclaredFields()) {
+
+			Annotation[] annotations = field.getDeclaredAnnotations();
+			for (Annotation annotation : annotations) {
+				if (annotation.annotationType().equals(LocaleSpecific.class)) {
+					fields.add(field);
+
+				}
+			}
+		}
+		return fields.toArray(new Field[0]);
 	}
 
 	/**
@@ -321,4 +405,5 @@ public abstract class DataStore {
 		return getDataList(getSchemaName(entityClass), query, pageNumber,
 				pageSize);
 	}
+
 }

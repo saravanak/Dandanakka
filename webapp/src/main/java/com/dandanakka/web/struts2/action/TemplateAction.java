@@ -72,7 +72,7 @@ public class TemplateAction extends PersistenceAction<Template> {
 		if (templateCategory == null) {
 			returnValue = super.save();
 		} else {
-			getDataStore().saveData(templateCategory);
+			getDataStore().saveObject(templateCategory);
 			returnValue = "save";
 		}
 		return returnValue;

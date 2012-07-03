@@ -49,7 +49,7 @@ public class BaseAction extends ActionSupport implements ParameterAware,
 	}
 
 	public Context getContext() throws SystemException {
-		return getApplicationManager().getContext();
+		return getApplicationManager().getContext(getLanguage());
 	}
 
 	public void loadContext() throws SystemException, DataStoreException {
@@ -124,6 +124,11 @@ public class BaseAction extends ActionSupport implements ParameterAware,
 
 	private String getPlural(Class clazz) {
 		return pluralOf(getName(clazz));
+	}
+
+	protected String getLanguage() {
+		String language = getLocale().getLanguage();
+		return language.indexOf("en") == -1 ? language : null;
 	}
 
 }

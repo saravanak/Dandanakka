@@ -3,6 +3,7 @@ package com.dandanakka.template.model;
 import java.util.List;
 
 import com.dandanakka.datastore.model.Id;
+import com.dandanakka.datastore.model.LocaleSpecific;
 import com.dandanakka.datastore.model.Reference;
 
 public class Link {
@@ -10,6 +11,7 @@ public class Link {
 	@Id
 	private String id;
 	private String parentId;
+	@LocaleSpecific
 	private String label;
 	private String url;
 	private String description;

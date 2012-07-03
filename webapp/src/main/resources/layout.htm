@@ -53,7 +53,10 @@
 		<h1>
 			<a href="#">Dandanakka</a>
 		</h1>
+		<h6>[@addLocales/]</h6>
 		<h2>
+		
+		
 			<ul id="menu">
 
 				<li class="menu_right"><a href="#" class="drop">Control
@@ -154,6 +157,7 @@
 [/#macro]
 
 [#function getUrl link]
+
 [#if link.url??]
 [#return link.url]
 [#elseif link.page??]
@@ -163,3 +167,18 @@
 [/#if]
   
 [/#function]
+
+
+[#macro addLocales]
+[#local locales= context.locales]
+[#if locales?? && locales?size >0 ]
+[#list locales as localeObj]
+	[#if locale.language != localeObj.code]
+		[@s.url id="url" includeParams="all"]
+            [@s.param name="request_locale"]${localeObj.code}[/@s.param]
+        [/@s.url]
+        [@s.a href="${url}"]${localeObj.label}[/@s.a]
+	[/#if]
+[/#list]  
+[/#if]
+[/#macro]

@@ -14,5 +14,9 @@ public class LocaleAction extends PersistenceAction<Locale> {
 		// TODO Auto-generated method stub
 		return Locale.class;
 	}
+	
+	public java.util.Locale[] getAvailableLocales(){
+		return java.util.Locale.getAvailableLocales() ;
+	}
 
 }

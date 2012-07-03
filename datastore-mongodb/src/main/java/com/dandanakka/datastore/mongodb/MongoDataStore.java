@@ -124,26 +124,34 @@ public class MongoDataStore extends DataStore {
 		List<Map<String, Object>> list = null;
 		DB db = getMongoDB();
 
-		BasicDBObject queryObject = new BasicDBObject();
+		DBCursor dbCursor = null ;
+		if(query !=null) {
+			BasicDBObject queryObject = new BasicDBObject();
 
-		QueryBuilder qb = new QueryBuilder();
+			QueryBuilder qb = new QueryBuilder();
 
-		List<Criteria> criterias = query.getCriterias();
-		for (Criteria criteria : criterias) {
+			List<Criteria> criterias = query.getCriterias();
+			for (Criteria criteria : criterias) {
 
-			switch (criteria.getOperator()) {
-			case IS_NULL:
-				qb.put(criteria.getColumnName()).is(null);
-				break;
-			case EQUALS:
-				queryObject.put(criteria.getColumnName(), criteria.getValue());
-				break;
+				switch (criteria.getOperator()) {
+				case IS_NULL:
+					qb.put(criteria.getColumnName()).is(null);
+					break;
+				case EQUALS:
+					queryObject.put(criteria.getColumnName(), criteria.getValue());
+					break;
+				}
 			}
+
+			queryObject.putAll(qb.get());
+
+			dbCursor = db.getCollection(schemaName).find(queryObject);
+			
 		}
-
-		queryObject.putAll(qb.get());
-
-		DBCursor dbCursor = db.getCollection(schemaName).find(queryObject);
+		else {
+			dbCursor = db.getCollection(schemaName).find();
+		}
+		
 
 		if (pageNumber != null) {
 			dbCursor = dbCursor.batchSize(pageSize)
