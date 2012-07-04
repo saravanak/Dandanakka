@@ -20,7 +20,6 @@ import com.dandanakka.datastore.model.PaginatedResult;
 import com.dandanakka.datastore.model.Query;
 import com.dandanakka.datastore.model.Reference;
 
-
 public abstract class DataStore {
 
 	private static final Map<String, DataStore> dataStoreMap = new HashMap<String, DataStore>();
@@ -131,6 +130,12 @@ public abstract class DataStore {
 			}
 		}
 
+		// Remove Reference Values
+		List<Field> referenceFields = getReferenceColumns(data.getClass());
+		for (Field field : referenceFields) {
+			dataMap.remove(field.getName());
+		}
+
 		return dataMap;
 	}
 
@@ -161,11 +166,12 @@ public abstract class DataStore {
 			// Set Locale Specific Fields
 
 			String localemarker = "_" + locale;
-			Object[] keys = dataMap.keySet().toArray() ;
+			Object[] keys = dataMap.keySet().toArray();
 			for (Object key : keys) {
 				if (key.toString().indexOf(localemarker) != -1) {
 					Object value = dataMap.remove(key);
-					dataMap.put(key.toString().replaceAll(localemarker, ""), value);
+					dataMap.put(key.toString().replaceAll(localemarker, ""),
+							value);
 				} else if (key.toString().indexOf('_') != -1) {
 					dataMap.remove(key);
 				}
@@ -200,7 +206,9 @@ public abstract class DataStore {
 	public <T> List<T> getDataList(Class<T> clazz) throws DataStoreException {
 		return getDataList(clazz, (Query) null, (String) null);
 	}
-	public <T> List<T> getDataList(Class<T> clazz, String locale) throws DataStoreException {
+
+	public <T> List<T> getDataList(Class<T> clazz, String locale)
+			throws DataStoreException {
 		return getDataList(clazz, (Query) null, locale);
 	}
 
