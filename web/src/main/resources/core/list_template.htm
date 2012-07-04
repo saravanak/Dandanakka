@@ -1,0 +1,58 @@
+[#ftl] [#assign content]
+
+<div style="text-align: right;">	
+[@s.select name="category" list="TemplateCategorys" listKey='name' listValue='label' theme="simple"/]
+<a href="${base}/${application}/core/template/category">Add</a>
+</div>
+
+<table id="list2"></table>
+<div id="pager2"></div>
+<script type="text/javascript">
+
+function getCategory() {
+	var category = $('#category option:selected').val();
+	if(category != -1) {
+		category = '&category='+category ;
+	}
+	else {
+		category = '' ;
+	}
+	return category ;
+}
+
+$("#category").change(function() { window.open ("${base}/${application}/core/template/list?"+getCategory(),"_self"); });
+
+ jQuery("#list2").jqGrid({ url:'${base}/${application}/core/template/search?'+getCategory(), datatype: "json",
+		colNames:['name','Name','Description'], 
+		colModel:[
+		   		{name:'name',index:'name', hidden: true  ,width:55,editable:false,editoptions:{readonly:true,size:10}} ,
+		   		{name:'name',index:'name', formatter: linkFormatter,width:220,editable:true,editoptions:{size:25}},
+		   		{name:'description',index:'description',width:220,editable:true,editoptions:{size:10}}	
+		   	], 
+		rowNum:10, rowList:[5,10,20,30], 
+		pager: '#pager2', autowidth:true, height:'auto' ,viewrecords: true,  caption:"Template" ,editurl:"${base}/${application}/core/template/delete" });
+
+  jQuery("#list2").jqGrid('navGrid','#pager2',
+		{edit:false,add:false,search:false}, //options 
+		{}, // edit options 
+		{}, // add options 
+		{reloadAfterSubmit:true}, // del options 
+		{} // search options 
+		).navButtonAdd('#pager2',{
+				caption:"",			   
+			   buttonicon:"ui-icon ui-icon-plus", 
+			   onClickButton: function(){ 
+			     window.open('${base}/${application}/core/template/edit?'+getCategory(),'_self');
+			   }, 
+			   position:"first"
+			});  
+
+  function linkFormatter(cellvalue, options, rowObject)
+  {
+     // do something here
+     return '<a href="${base}/${application}/core/template/edit?id='+rowObject[0]+'">'+cellvalue+'</a>';
+  }
+  
+</script> 
+[/#assign] 
+[#include "/layout.htm"]

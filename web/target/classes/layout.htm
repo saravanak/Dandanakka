@@ -1,0 +1,171 @@
+[#ftl]
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta charset="utf-8">
+<title>Dandanakka - Cloud Based Application Platform</title>
+
+
+<script src="${base}/../dandanakka-static/js/jquery-1.7.2.min.js"
+	type="text/javascript"></script>
+<script
+	src="${base}/../dandanakka-static/js/jqgrid/jquery.jqGrid.min.js"
+	type="text/javascript"></script>
+<script
+	src="${base}/../dandanakka-static/js/jqgrid/i18n/grid.locale-en.js"
+	type="text/javascript"></script>
+<script
+	src="${base}/../dandanakka-static/js/uniform/uni-form-validation.jquery.min.js"></script>
+<script type="text/javascript"
+	src="${base}/../dandanakka-static/js/jstree/jquery.jstree.js"></script>
+
+<link
+	href="${base}/../dandanakka-static/theme/${theme}/css/jquery-ui-1.8.1.custom.css"
+	rel="stylesheet" type="text/css" media="screen" />
+<link
+	href="${base}/../dandanakka-static/theme/${theme}/css/ui.jqgrid.css"
+	rel="stylesheet" type="text/css" media="screen" />
+<link
+	href="${base}/../dandanakka-static/theme/${theme}/css/uni-form.css"
+	media="screen" type="text/css" rel="stylesheet" />
+<link
+	href="${base}/../dandanakka-static/theme/${theme}/css/blue.uni-form.css"
+	media="screen" type="text/css" rel="stylesheet" />
+<link rel="stylesheet"
+	href="${base}/../dandanakka-static/theme/${theme}/css/controlpanel.css"
+	type="text/css" media="screen">
+
+<link href="${base}/../dandanakka-static/theme/${theme}/styles.css"
+	type="text/css" media="screen" rel="stylesheet" />
+<link type="text/css"
+	href="${base}/../dandanakka-static/theme/${theme}/print.css"
+	media="print" rel="stylesheet" />
+
+</head>
+
+<body>
+
+	[#--[#include "$$${application}$$/${theme}"] --]
+	<div id="wrapper">
+		<!-- #wrapper -->
+
+		<header><!-- header -->
+		<h1>
+			<a href="#">Dandanakka</a>
+		</h1>
+
+		<h2>
+
+
+			<ul id="menu">
+
+				<li class="menu_right"><a href="#" class="drop">Control
+						Panel</a> <!-- Begin 3 columns Item -->
+
+					<div class="dropdown_3columns align_right">
+						<!-- Begin 3 columns container -->
+
+
+
+						<div class="col_1">
+
+							<ul class="greybox">
+								<li><a href="${base}/${application}/core/type/list">Type</a></li>
+								<li><a href="${base}/${application}/core/schema/list">Schema</a></li>
+								<li><a href="${base}/${application}/core/template/list">Template</a></li>
+								<li><a href="${base}/${application}/core/link/list">Link</a></li>
+								<li><a href="${base}/${application}/core/locale/list">Locale</a></li>
+							</ul>
+
+						</div>
+
+						<div class="col_1">
+
+							<ul class="greybox">
+								<li><a href="#">ThemeForest</a></li>
+								<li><a href="#">GraphicRiver</a></li>
+								<li><a href="#">ActiveDen</a></li>
+								<li><a href="#">VideoHive</a></li>
+								<li><a href="#">3DOcean</a></li>
+							</ul>
+
+						</div>
+
+						<div class="col_1">
+
+							<ul class="greybox">
+								<li><a href="#">Design</a></li>
+								<li><a href="#">Logo</a></li>
+								<li><a href="#">Flash</a></li>
+								<li><a href="#">Illustration</a></li>
+								<li><a href="#">More...</a></li>
+							</ul>
+
+						</div>
+
+
+					</div> <!-- End 3 columns container --></li>
+				<!-- End 3 columns Item -->
+
+
+			</ul>
+
+		</h2>
+
+
+		<div
+			style="">[@addLocales/]</div>
+
+		</header>
+		<!-- end of header -->
+		<nav><!-- top nav -->
+		<div class="menu">[@tree links=context.links.master/]</div>
+		</nav>
+
+		<section id="main"><!-- #main content and sidebar area -->
+		${content} </section>
+		<!-- end of #main content and sidebar-->
+
+		<footer> <section id="footer-area"> </section><!-- end of #footer-area -->
+		</footer>
+
+	</div>
+	<!-- #wrapper -->
+
+
+
+</body>
+
+
+</html>
+
+[#macro tree links] [#if links?? && links?size >0 ]
+<ul>
+	[#list links as link]
+
+	<li id="${link.id}" [#if link.links?? && link.links?size>0]class="jstree-open"[/#if]><a
+		href="${getUrl(link)}">${link.label}</a> [#if link.links??] [@tree
+		link.links/] [/#if]
+	</li> [/#list]
+</ul>
+[/#if] [/#macro] [#function getUrl link] [#if link.url??] [#return
+link.url] [#elseif link.page??] [#return
+base+'/${application}/core/page/view?pName='+link.page] [#else] [#return
+base+'/${application}/core/link/actions?lId='+link.id] [/#if]
+
+[/#function]
+ [#macro addLocales]
+  [#local locales= context.locales] 
+ 
+  	[#if locales?? && locales?size >0 ] 
+  	 	[#local locales = locales + [ {"code":"en", "label":"English"}] /]
+	  	[#list locales as localeObj] 
+	  		[#if locale.language != localeObj.code] 
+	  			[@s.url id="url" includeParams="all"]
+					[@s.param name="request_locale"]${localeObj.code}[/@s.param] 
+				[/@s.url]
+				[@s.a href="${url}"]${localeObj.label}[/@s.a] 
+			[/#if] 
+		[/#list] 
+	[/#if]
+[/#macro]
