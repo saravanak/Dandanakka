@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.dandanakka.datastore.model.Attribute;
 import com.dandanakka.datastore.model.Schema;
-import com.dandanakka.datastore.model.Type;
+import com.dandanakka.datastore.model.Application;
 
 public class SchemaAction extends PersistenceAction<Schema> {
 
@@ -14,15 +14,14 @@ public class SchemaAction extends PersistenceAction<Schema> {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private List<Schema> schemas;
 
-	private List<Type> types;
-
-	public List<Type> getTypes() {
-		return types;
+	public List<Schema> getSchemas() {
+		return schemas;
 	}
 
-	public void setTypes(List<Type> types) {
-		this.types = types;
+	public void setSchemas(List<Schema> schemas) {
+		this.schemas = schemas;
 	}
 
 	private boolean addAttribute;
@@ -33,7 +32,7 @@ public class SchemaAction extends PersistenceAction<Schema> {
 
 	@Override
 	public String edit() throws Exception {
-		setTypes(getDataStore().getDataList(new Type()));
+		setSchemas(getDataStore().getDataList(new Schema()));
 		return super.edit();
 	}
 
@@ -48,7 +47,7 @@ public class SchemaAction extends PersistenceAction<Schema> {
 	}
 
 	private String addAttribute() throws Exception {
-		setTypes(getDataStore().getDataList(new Type()));
+		setSchemas(getDataStore().getDataList(new Schema()));
 		List<Attribute> attributes = entity.getAttributes();
 		if (attributes == null) {
 			attributes = new ArrayList<>(1);

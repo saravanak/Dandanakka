@@ -6,8 +6,7 @@
 <script type="text/javascript">
 
 function getCategory() {
-	var category = '&category=page' ;
-	
+	var category = '[#if Parameters.category?exists]&category=${Parameters.category}[/#if]' ;	
 	return category ;
 }
 

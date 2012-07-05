@@ -45,7 +45,7 @@
 
 <body>
 
-	[#--[#include "$$${application}$$/${theme}"] --]
+	[#--[#include "$$${application}$$/${context.application.theme}"] --] 
 	<div id="wrapper">
 		<!-- #wrapper -->
 
@@ -70,7 +70,7 @@
 						<div class="col_1">
 
 							<ul class="greybox">
-								<li><a href="${base}/${application}/core/type/list">Type</a></li>
+								<li><a href="${base}/${application}/core/template/select?category=theme">Theme</a></li>
 								<li><a href="${base}/${application}/core/schema/list">Schema</a></li>
 								<li><a href="${base}/${application}/core/template/list">Template</a></li>
 								<li><a href="${base}/${application}/core/link/list">Link</a></li>

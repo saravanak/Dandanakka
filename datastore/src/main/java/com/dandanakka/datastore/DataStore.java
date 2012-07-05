@@ -13,6 +13,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import com.dandanakka.core.util.ConfigUtil;
 import com.dandanakka.datastore.exception.DataStoreException;
+import com.dandanakka.datastore.model.Application;
 import com.dandanakka.datastore.model.Id;
 import com.dandanakka.datastore.model.LocaleSpecific;
 import com.dandanakka.datastore.model.Operator;
@@ -24,25 +25,33 @@ public abstract class DataStore {
 
 	private static final Map<String, DataStore> dataStoreMap = new HashMap<String, DataStore>();
 
-	private String application;
+	private Application application;
 
-	protected String getApplication() {
+	public Application getApplication() {
 		return application;
 	}
 
-	protected void setApplication(String application) {
-		this.application = application;
+	private void setApplication(final String applicationName)
+			throws DataStoreException {
+		if (applicationName.equals("application")) {
+			application = new Application();
+			application.setName("application");
+			application.setTheme("basic");
+		} else {
+			application = getDataStore("application").getObject(
+					Application.class, applicationName);
+		}
 	}
 
-	public static DataStore getDataStore(final String application)
+	public static DataStore getDataStore(final String applicationName)
 			throws DataStoreException {
-		DataStore dataStore = dataStoreMap.get(application);
+		DataStore dataStore = dataStoreMap.get(applicationName);
 		if (dataStore == null) {
 			try {
 				dataStore = (DataStore) Class.forName(
 						ConfigUtil.getCongiguration("datastore")).newInstance();
-				dataStore.setApplication(application);
-				dataStoreMap.put(application, dataStore);
+				dataStore.setApplication(applicationName);
+				dataStoreMap.put(applicationName, dataStore);
 			} catch (InstantiationException e) {
 				throw new DataStoreException("please check MongoDB instance", e);
 			} catch (IllegalAccessException e) {
@@ -412,5 +421,8 @@ public abstract class DataStore {
 		return getDataList(getSchemaName(entityClass), query, pageNumber,
 				pageSize);
 	}
+
+	public abstract void createClone(final String applicationName)
+			throws DataStoreException;
 
 }

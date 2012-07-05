@@ -11,12 +11,11 @@
 			<result type="freemarker">/core/login.htm</result>			
 		</action>
 
-		<action name="*/*/type/*" class="com.dandanakka.web.struts2.action.TypeAction"
-			method="{3}">
-			<result type="freemarker" name="input">/core/type.htm</result>
-			<result type="freemarker" name="list">/core/list_type.htm</result>
-			<result type="redirectAction" name="save">${application}/core/type/list
-			</result>
+		<action name="application/*" class="com.dandanakka.web.struts2.action.ApplicationAction"
+			method="{1}">
+			<result type="freemarker" name="input">/core/application.htm</result>
+			<result type="freemarker" name="list">/core/list_application.htm</result>
+			<result type="redirectAction" name="save">application/list</result>
 		</action>
 
 

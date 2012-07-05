@@ -2,7 +2,6 @@
 
 [#assign content]
 [@s.form action="submit"] 
-[@s.hidden name="entity.id" key="id"/]
 [@s.textfield name="entity.name" key="name"/]
 [@s.textfield name="entity.label" key="label"/]
 [@s.textfield name="entity.description" key="description"/]
@@ -10,7 +9,7 @@
 [@s.submit key="add.attribute" name="addAttribute"/]
 
 [@s.iterator value="entity.attributes" status="key" ]
-[@s.select name="entity.attributes[%{#key.index}].type"  key="type" list="types" listKey='name' listValue='description'/]
+[@s.select name="entity.attributes[%{#key.index}].type"  key="type" list="schemas" listKey='name' listValue='label'/]
 [@s.textfield name="entity.attributes[%{#key.index}].name" key="name"/]
 [@s.checkbox name="entity.attributes[%{#key.index}].unique" key="isUnique"/]
 [@s.checkbox name="entity.attributes[%{#key.index}].array" key="isArray"/]

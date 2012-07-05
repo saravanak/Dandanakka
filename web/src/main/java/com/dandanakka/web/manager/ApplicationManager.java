@@ -64,6 +64,8 @@ public class ApplicationManager {
 		}
 
 		Context context = new Context();
+		
+		context.setApplication(dataStore.getApplication());
 
 		context.setLinks(links);
 

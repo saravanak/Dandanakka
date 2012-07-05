@@ -3,10 +3,13 @@ package com.dandanakka.web.model;
 import java.util.List;
 import java.util.Map;
 
+import com.dandanakka.datastore.model.Application;
 import com.dandanakka.template.model.Link;
 import com.dandanakka.template.model.Locale;
 
 public class Context {
+
+	private Application application;
 
 	private List<Locale> locales;
 
@@ -26,6 +29,14 @@ public class Context {
 
 	public void setLocales(List<Locale> locales) {
 		this.locales = locales;
+	}
+
+	public Application getApplication() {
+		return application;
+	}
+
+	public void setApplication(Application application) {
+		this.application = application;
 	}
 
 }

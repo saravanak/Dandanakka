@@ -16,6 +16,7 @@ import com.dandanakka.datastore.model.Criteria;
 import com.dandanakka.datastore.model.PaginatedResult;
 import com.dandanakka.datastore.model.Query;
 import com.mongodb.BasicDBObject;
+import com.mongodb.CommandResult;
 import com.mongodb.DB;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
@@ -32,8 +33,13 @@ public class MongoDataStore extends DataStore {
 			Mongo mongo = new Mongo(
 					ConfigUtil.getCongiguration("mongodb.host"),
 					ConfigUtil.getCongigurationAsInt("mongodb.port"));
-			db = mongo.getDB((getApplication() == null) ? "root" : "site"
-					+ getApplication());
+			String dbName = "site" + getApplication().getName();
+			if (mongo.getDatabaseNames().contains(dbName)) {
+				db = mongo.getDB(dbName);
+			} else {
+				throw new DataStoreException("Application not found");
+			}
+
 		} catch (UnknownHostException e) {
 			throw new DataStoreException("please check MongoDB instance", e);
 		} catch (MongoException e) {
@@ -124,8 +130,8 @@ public class MongoDataStore extends DataStore {
 		List<Map<String, Object>> list = null;
 		DB db = getMongoDB();
 
-		DBCursor dbCursor = null ;
-		if(query !=null) {
+		DBCursor dbCursor = null;
+		if (query != null) {
 			BasicDBObject queryObject = new BasicDBObject();
 
 			QueryBuilder qb = new QueryBuilder();
@@ -138,7 +144,8 @@ public class MongoDataStore extends DataStore {
 					qb.put(criteria.getColumnName()).is(null);
 					break;
 				case EQUALS:
-					queryObject.put(criteria.getColumnName(), criteria.getValue());
+					queryObject.put(criteria.getColumnName(),
+							criteria.getValue());
 					break;
 				}
 			}
@@ -146,12 +153,10 @@ public class MongoDataStore extends DataStore {
 			queryObject.putAll(qb.get());
 
 			dbCursor = db.getCollection(schemaName).find(queryObject);
-			
-		}
-		else {
+
+		} else {
 			dbCursor = db.getCollection(schemaName).find();
 		}
-		
 
 		if (pageNumber != null) {
 			dbCursor = dbCursor.batchSize(pageSize)
@@ -198,6 +203,39 @@ public class MongoDataStore extends DataStore {
 		}
 
 		return idValue;
+	}
+
+	@Override
+	public void createClone(String applicationName) throws DataStoreException {
+		try {
+
+			DB db = getMongoDB();
+
+			String dbName = "site" + applicationName;
+			if (db.getMongo().getDatabaseNames().contains(dbName)) {
+				throw new DataStoreException("Clone Already Exists");
+			} else {
+				DBObject dbObject = new BasicDBObject();
+				dbObject.put("copydb", 1);
+				dbObject.put("fromdb", db.getName());
+				dbObject.put("todb", "site" + applicationName);
+
+				CommandResult result = db.getMongo()
+						.getDB(ConfigUtil.getCongiguration("mongodb.admindb"))
+						.command(dbObject);
+			}
+
+		} catch (UnknownHostException e) {
+			throw new DataStoreException(
+					"can not create Clone. please check MongoDB instance", e);
+		} catch (MongoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
