@@ -9,7 +9,7 @@
 [@s.submit key="add.attribute" name="addAttribute"/]
 
 [@s.iterator value="entity.attributes" status="key" ]
-[@s.select name="entity.attributes[%{#key.index}].type"  key="type" list="schemas" listKey='name' listValue='label'/]
+[@s.select name="entity.attributes[%{#key.index}].type"  key="type" list="Schemas" listKey='name' listValue='label'/]
 [@s.textfield name="entity.attributes[%{#key.index}].name" key="name"/]
 [@s.checkbox name="entity.attributes[%{#key.index}].unique" key="isUnique"/]
 [@s.checkbox name="entity.attributes[%{#key.index}].array" key="isArray"/]

@@ -238,4 +238,22 @@ public class MongoDataStore extends DataStore {
 
 	}
 
+	@Override
+	public void deleteDataStore(String applicationName)
+			throws DataStoreException {
+		try {
+
+			DB db = getMongoDB();
+
+			String dbName = "site" + applicationName;
+			if (db.getMongo().getDatabaseNames().contains(dbName)) {
+				db.getMongo().getDB("site" + applicationName).dropDatabase();
+			}
+		} catch (MongoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 }

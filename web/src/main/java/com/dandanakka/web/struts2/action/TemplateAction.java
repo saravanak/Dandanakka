@@ -1,6 +1,7 @@
 package com.dandanakka.web.struts2.action;
 
 import com.dandanakka.datastore.exception.DataStoreException;
+import com.dandanakka.datastore.model.Application;
 import com.dandanakka.datastore.model.Operator;
 import com.dandanakka.datastore.model.PaginatedResult;
 import com.dandanakka.datastore.model.Query;
@@ -50,6 +51,14 @@ public class TemplateAction extends PersistenceAction<Template> {
 	public String select() throws Exception {
 		return "select";
 	}
+	
+	public String theme() throws Exception {
+		Application application = new Application() ;
+		application.setTheme(getParameter("tId")) ;
+		getDataStore().saveApplication(application) ;
+		loadContext() ;
+		return "theme";
+	}
 
 	public String edit() throws Exception {
 		addMaster(Schema.class);
@@ -96,7 +105,7 @@ public class TemplateAction extends PersistenceAction<Template> {
 			query.addCriteria("category", Operator.EQUALS, category);
 		}
 
-		return getDataStore().getDataList(getEntityClass(), query, pageNumber,
+		return getDataStore().getDataList(getEntityClass(), query,getLanguage(), pageNumber,
 				pageSize);
 	}
 }

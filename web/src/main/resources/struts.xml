@@ -87,6 +87,8 @@
 			</result>
 			<result type="redirectAction" name="save">${application}/core/template/list
 			</result>
+			<result type="redirectAction" name="theme">${application}/core/template/select?category=theme
+			</result>
 		</action>
 
 

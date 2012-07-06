@@ -14,16 +14,6 @@ public class SchemaAction extends PersistenceAction<Schema> {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private List<Schema> schemas;
-
-	public List<Schema> getSchemas() {
-		return schemas;
-	}
-
-	public void setSchemas(List<Schema> schemas) {
-		this.schemas = schemas;
-	}
-
 	private boolean addAttribute;
 
 	public void setAddAttribute(boolean addAttribute) {
@@ -32,7 +22,7 @@ public class SchemaAction extends PersistenceAction<Schema> {
 
 	@Override
 	public String edit() throws Exception {
-		setSchemas(getDataStore().getDataList(new Schema()));
+		addMaster(Schema.class) ;
 		return super.edit();
 	}
 
@@ -47,7 +37,7 @@ public class SchemaAction extends PersistenceAction<Schema> {
 	}
 
 	private String addAttribute() throws Exception {
-		setSchemas(getDataStore().getDataList(new Schema()));
+		addMaster(Schema.class) ;
 		List<Attribute> attributes = entity.getAttributes();
 		if (attributes == null) {
 			attributes = new ArrayList<>(1);

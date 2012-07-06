@@ -26,8 +26,14 @@ function getCategory() {
 
   function linkFormatter(cellvalue, options, rowObject)
   {
-     // do something here
-     return '<a href="${base}/${application}/core/data/edit?tId='+rowObject[0]+'[#if Parameters.lId?exists]&lId=${Parameters.lId}[/#if]">'+cellvalue+'</a>';
+		 
+		 	[#if Parameters.category == "page"]
+		 		return '<a href="${base}/${application}/core/data/edit?tId='+rowObject[0]+'[#if Parameters.lId?exists]&lId=${Parameters.lId}[/#if]">'+cellvalue+'</a>';
+		 	[#else]	
+		 	return '<a href="${base}/${application}/core/template/theme?tId='+rowObject[0]+'">'+cellvalue+'</a>';
+		 	[/#if]
+		 
+     
   }
   
 </script> 

@@ -31,11 +31,29 @@ public abstract class DataStore {
 		return application;
 	}
 
+	public void saveApplication(Application applicationToSave)
+			throws DataStoreException {
+		if (!application.getName().equals("application")) {
+			applicationToSave.setName(application.getName());
+			getDataStore("application").saveObject(applicationToSave, true);
+			setApplication(application.getName());
+		}
+	}
+
 	private void setApplication(final String applicationName)
 			throws DataStoreException {
 		if (applicationName.equals("application")) {
 			application = new Application();
 			application.setName("application");
+			try {
+				application.setLabel(ConfigUtil
+						.getCongiguration("admin.app.label"));
+				application.setDescription(ConfigUtil
+						.getCongiguration("admin.app.description"));
+			} catch (IOException e) {
+				throw new DataStoreException(
+						"please check config file instance", e);
+			}
 			application.setTheme("basic");
 		} else {
 			application = getDataStore("application").getObject(
@@ -416,13 +434,35 @@ public abstract class DataStore {
 	public abstract String getIdColumnName();
 
 	public <T> PaginatedResult<T> getDataList(Class<T> entityClass,
-			Query query, Integer pageNumber, Integer pageSize)
+			Query query, String locale, Integer pageNumber, Integer pageSize)
 			throws DataStoreException {
-		return getDataList(getSchemaName(entityClass), query, pageNumber,
-				pageSize);
+
+		PaginatedResult<T> paginatedResult = null;
+		List<T> list = null;
+
+		paginatedResult = getDataList(getSchemaName(entityClass), query,
+				pageNumber, pageSize);
+		if (paginatedResult != null) {
+			List<Map<String, Object>> mapList = (List<Map<String, Object>>) paginatedResult
+					.getResults();
+
+			if (mapList != null) {
+				list = new ArrayList<T>(mapList.size());
+				for (Map<String, Object> map : mapList) {
+					list.add((T) getObject(entityClass, map, locale));
+				}
+			}
+			paginatedResult.setResults(list);
+		}
+
+		return paginatedResult;
+
 	}
 
 	public abstract void createClone(final String applicationName)
+			throws DataStoreException;
+
+	public abstract void deleteDataStore(String applicationName)
 			throws DataStoreException;
 
 }

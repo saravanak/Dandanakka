@@ -41,6 +41,7 @@ public abstract class PersistenceAction<T> extends BaseAction {
 
 	protected String save() throws Exception {
 		getDataStore().saveObject(entity,getLanguage(),true);
+		loadContext();
 		return "save";
 	}
 
