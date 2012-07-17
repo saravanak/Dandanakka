@@ -1,9 +1,0 @@
-
-datastore=com.dandanakka.datastore.mongodb.MongoDataStore
-
-mongodb.host=127.0.0.1
-mongodb.port=27017
-mongodb.admindb=admin
-
-admin.app.label=Dandanakka
-admin.app.description=Dandanakka - Cloud Based Application Platform !
