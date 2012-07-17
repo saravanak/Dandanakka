@@ -34,7 +34,7 @@ public class MongoDataStore extends DataStore {
 					ConfigUtil.getCongiguration("mongodb.host"),
 					ConfigUtil.getCongigurationAsInt("mongodb.port"));
 			String dbName = "site" + getApplication().getName();
-			if (mongo.getDatabaseNames().contains(dbName)) {
+			if (getApplication().getName().equals("application") || mongo.getDatabaseNames().contains(dbName)) {
 				db = mongo.getDB(dbName);
 			} else {
 				throw new DataStoreException("Application not found");

@@ -3,8 +3,9 @@
 <html>
 <head>
 <meta charset="utf-8">
+[#if context.application.description??]
 <title>${context.application.description}</title>
-
+[/#if]
 
 <script src="${base}/../dandanakka-static/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script	src="${base}/../dandanakka-static/js/jqgrid/jquery.jqGrid.min.js" type="text/javascript"></script>
@@ -21,7 +22,40 @@
 [#if context.application.theme??]
 	[#include "$$${application}$$/${context.application.theme}"]
 [#else]
-${content}
+
+<link href="${base}/../dandanakka-static/admin/css/css.css" rel="stylesheet" type="text/css" />
+<link href="${base}/../dandanakka-static/theme/basic/css/jquery-ui-1.8.1.custom.css" rel="stylesheet" type="text/css" />
+<link href="${base}/../dandanakka-static/theme/basic/css/uni-form.css" rel="stylesheet" type="text/css" />
+<link href="${base}/../dandanakka-static/theme/basic/css/ui.jqgrid.custom.css" rel="stylesheet" type="text/css" />
+<link href="${base}/../dandanakka-static/theme/basic/css/blue.uni-form.css" rel="stylesheet" type="text/css" />
+
+<div id="container"><!-- container Start-->
+  
+  <div id="topbanner"><!-- topbanner Start-->
+    <div id="logo"><img src="images/logo.gif" width="81" height="43" alt="" /> Dandanakka</div>
+    <div id="smltxt"><span>Welcome DHANANJAYAN!</span> <a href="#">My Account</a> | <a href="#">Logout</a></div>
+  </div><!-- topbanner End--> 
+  
+  <div id="topnav"><!-- top-nav Start-->
+  	<ul>
+    	<li><a href="#">Home</a></li>
+    	<li><span>About Us</span></li>
+    	<li><a href="#">Contact US</a></li>          
+  	</ul>
+  </div><!-- top-nav End-->
+  
+  <div id="content"><!-- body Start-->
+ 
+  </div><!-- body End-->
+  
+  <div id="footer"><!-- Footer Start-->
+  	<p>Copyright © 2009 - 2012 dandanakka.com  All Rights Reserved.</p>
+  </div><!-- Footer End-->
+
+</div><!-- container End-->
+
+
+
 [/#if]
 
 
