@@ -19,7 +19,7 @@ public class ApplicationManager {
 	private static final Map<String, ApplicationManager> applicationManagerMap = new HashMap<String, ApplicationManager>();
 
 	private DataStore dataStore;
-	private Map<String, Context> contextMap = new HashMap<>();
+	private Map<String, Context> contextMap = new HashMap<String, Context> ();
 
 	private ApplicationManager(String application) throws SystemException {
 		try {

@@ -40,7 +40,7 @@ public class SchemaAction extends PersistenceAction<Schema> {
 		addMaster(Schema.class) ;
 		List<Attribute> attributes = entity.getAttributes();
 		if (attributes == null) {
-			attributes = new ArrayList<>(1);
+			attributes = new ArrayList<Attribute>(1);
 		}
 		attributes.add(new Attribute());
 		entity.setAttributes(attributes);
