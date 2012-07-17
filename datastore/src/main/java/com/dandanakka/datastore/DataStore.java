@@ -54,7 +54,7 @@ public abstract class DataStore {
 				throw new DataStoreException(
 						"please check config file instance", e);
 			}
-			application.setTheme("basic");
+			
 		} else {
 			application = getDataStore("application").getObject(
 					Application.class, applicationName);

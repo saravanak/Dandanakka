@@ -18,8 +18,11 @@
 
 <body>
 
+[#if context.application.theme??]
 	[#include "$$${application}$$/${context.application.theme}"]
-
+[#else]
+${content}
+[/#if]
 
 
 </body>
