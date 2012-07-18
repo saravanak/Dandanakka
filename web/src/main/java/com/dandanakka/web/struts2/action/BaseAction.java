@@ -1,10 +1,8 @@
 package com.dandanakka.web.struts2.action;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
 import java.util.Map;
-import java.util.zip.Inflater;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,7 +16,6 @@ import com.dandanakka.web.manager.ApplicationManager;
 import com.dandanakka.web.model.Context;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import static org.jvnet.inflector.Noun.pluralOf;
 
 public class BaseAction extends ActionSupport implements ParameterAware,
 		ServletResponseAware {
@@ -123,7 +120,17 @@ public class BaseAction extends ActionSupport implements ParameterAware,
 	}
 
 	private String getPlural(Class clazz) {
-		return pluralOf(getName(clazz));
+		String name = getName(clazz) ;
+		if(name.endsWith("y") && !name.endsWith("ay") && !name.endsWith("ey") && !name.endsWith("iy") && !name.endsWith("oy") && !name.endsWith("uy")) {
+			name = name.substring(name.lastIndexOf('y')) + "ies";
+		}
+		else if(name.endsWith("x") || name.endsWith("h")) {
+			name = name + "es";
+		}
+		else {
+			name = name + "s";
+		}
+		return name;
 	}
 
 	protected String getLanguage() {

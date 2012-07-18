@@ -1,31 +1,32 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.dandanakka</groupId>
-    <artifactId>dandanakka</artifactId>
-    <version>1.0</version>
-  </parent>
-  <groupId>com.dandanakka.web</groupId>
-  <artifactId>web</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>web</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.dandanakka</groupId>
+		<artifactId>dandanakka</artifactId>
+		<version>1.0</version>
+	</parent>
+	<groupId>com.dandanakka.web</groupId>
+	<artifactId>web</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>web</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<struts2.version>2.3.4</struts2.version>
 
-  </properties>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-<dependency>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>com.dandanakka.datastore.mongodb</groupId>
 			<artifactId>datastore-mongodb</artifactId>
 			<version>1.0-SNAPSHOT</version>
@@ -38,7 +39,7 @@
 		</dependency>
 
 
-<dependency>
+		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>3.0.3.RELEASE</version>
@@ -90,12 +91,12 @@
 			<scope>provided</scope>
 		</dependency>
 
-		
 
 
-  </dependencies>
-<build>
-		
+
+	</dependencies>
+	<build>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
