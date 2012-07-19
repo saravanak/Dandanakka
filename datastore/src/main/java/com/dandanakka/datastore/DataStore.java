@@ -408,6 +408,10 @@ public abstract class DataStore {
 		}
 		return fields.toArray(new Field[0]);
 	}
+	
+	public void translate(Class clazz) {
+		
+	}
 
 	/**
 	 * Abstract Methods ( Specific to DataStore Implementations )

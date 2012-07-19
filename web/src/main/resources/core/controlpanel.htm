@@ -1,7 +1,10 @@
 [#ftl] 
 
 [#assign content]
-<a href="${base}/${application}/core/template/select?category=page[#if Parameters.lId?exists]&lId=${Parameters.lId}[/#if]">Create Page</a>
-<a href="${base}/${application}/core/page/list?[#if Parameters.lId?exists]link=${Parameters.lId}[/#if]">Link Page</a>
+<a href="${base}/${application}/core/template/select?category=theme">Theme</a><br></br>
+<a href="${base}/${application}/core/schema/list">Schema</a><br></br>
+<a href="${base}/${application}/core/template/list">Template</a><br></br>
+<a href="${base}/${application}/core/link/list">Link</a><br></br>
+<a href="${base}/${application}/core/locale/list">Locale</a><br></br>
 [/#assign] 
 [#include "/layout.htm"]
