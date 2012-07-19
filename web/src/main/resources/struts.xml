@@ -6,13 +6,7 @@
 <struts>
 
 	<package name="core" extends="struts-default">
-
-		<default-action-ref name="home" />
-
-		<action name="home" class="com.dandanakka.web.struts2.action.BaseAction">
-			<result type="freemarker">/core/controlpanel.htm</result>
-		</action>
-
+		
 		<action name="login" class="com.dandanakka.web.struts2.action.BaseAction">
 			<result type="freemarker">/core/login.htm</result>
 		</action>
@@ -20,9 +14,9 @@
 		<action name="application/*"
 			class="com.dandanakka.web.struts2.action.ApplicationAction" method="{1}">
 			<result type="freemarker" name="input">/core/application.htm</result>
-			<result type="freemarker" name="list">/core/list_application.htm</result>
+			<result type="freemarker" name="list">/core/list_application.htm
+			</result>
 			<result type="redirectAction" name="save">application/list</result>
-			<result type="freemarker" name="success">/core/list_application.htm</result>
 		</action>
 
 		<action name="*/*/controlpanel" class="com.dandanakka.web.struts2.action.BaseAction">
@@ -104,6 +98,8 @@
 
 
 		<!-- Add actions here -->
+
+
 	</package>
 
 
