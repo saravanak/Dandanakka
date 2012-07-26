@@ -122,7 +122,7 @@ public class BaseAction extends ActionSupport implements ParameterAware,
 	private String getPlural(Class clazz) {
 		String name = getName(clazz) ;
 		if(name.endsWith("y") && !name.endsWith("ay") && !name.endsWith("ey") && !name.endsWith("iy") && !name.endsWith("oy") && !name.endsWith("uy")) {
-			name = name.substring(name.lastIndexOf('y')) + "ies";
+			name = name.substring(0,name.lastIndexOf('y')) + "ies";
 		}
 		else if(name.endsWith("x") || name.endsWith("h")) {
 			name = name + "es";

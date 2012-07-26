@@ -9,12 +9,21 @@
 
 
 
-	<http auto-config="true">
-        <intercept-url pattern="/dilipandco/core/type/list" access="ROLE_USER" />
-        <form-login login-page="/login" default-target-url="/welcome"
+	<http auto-config="true" entry-point-ref="authenticationEntryPoint">
+		<intercept-url pattern="/**/login"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/**/controlpanel"
+			access="ROLE_USER" />
+		<form-login default-target-url="/welcome"
 			authentication-failure-url="/loginfailed" />
 		<logout logout-success-url="/logout" />
-    </http>
+	</http>
+
+	<b:bean id="authenticationEntryPoint"
+		class="com.dandanakka.web.security.spring.LoginUrlAuthenticationEntryPoint">
+		<b:property name="loginFormUrl" value="/core/login" />
+	</b:bean>
+
 
 	<authentication-manager>
 		<!-- Usernames/Passwords are rod/koala dianne/emu scott/wombat peter/opal -->
@@ -33,6 +42,6 @@
 		</authentication-provider>
 	</authentication-manager>
 
-	
+
 
 </b:beans>
