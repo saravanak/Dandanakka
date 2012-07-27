@@ -1,5 +1,5 @@
 [#ftl] [#assign content]
-<form name="f" action="j_spring_security_check" method="POST">
+<form name="f" action="${base}/j_spring_security_check?application=${application}" method="POST">
 	<table>
 		<tr>
 			<td>User:</td>

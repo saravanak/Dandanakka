@@ -34,7 +34,13 @@
   
   <div id="topbanner"><!-- topbanner Start-->
     <div id="logo"><img src="${base}/../dandanakka-static/admin/images/logo.gif" width="81" height="43" alt="" /> Dandanakka</div>
-    <div id="smltxt"><span>Welcome DHANANJAYAN!</span> <a href="${base}/${application}/core/controlpanel">Control Panel</a> | <a href="#">Logout</a></div>
+    <div id="smltxt">
+  	[#if user??]
+    <span>Welcome DHANANJAYAN!</span> <a href="${base}/${application}/core/controlpanel">Control Panel</a> | <a href="${base}/j_spring_security_logout?application=${application}">Logout</a>
+  	[#else]
+  	<a href="${base}/${application}/core/login">Login</a>
+  	[/#if]
+  	</div>
   </div><!-- topbanner End--> 
   
   <div id="topnav"><!-- top-nav Start-->

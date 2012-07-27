@@ -6,7 +6,7 @@
 <struts>
 
 	<package name="core" extends="struts-default">
-		
+
 
 
 		<action name="application/*"
@@ -19,6 +19,12 @@
 		<action name="*/*/login" class="com.dandanakka.web.struts2.action.BaseAction">
 			<result type="freemarker">/core/login.htm</result>
 		</action>
+
+
+		<action name="*/*/home" class="com.dandanakka.web.struts2.action.BaseAction">
+			<result type="freemarker">/core/home.htm</result>
+		</action>
+
 		<action name="*/*/controlpanel" class="com.dandanakka.web.struts2.action.BaseAction">
 			<result type="freemarker">/core/controlpanel.htm</result>
 

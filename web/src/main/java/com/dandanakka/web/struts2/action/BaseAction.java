@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 import com.dandanakka.datastore.DataStore;
 import com.dandanakka.datastore.exception.DataStoreException;
@@ -120,14 +122,14 @@ public class BaseAction extends ActionSupport implements ParameterAware,
 	}
 
 	private String getPlural(Class clazz) {
-		String name = getName(clazz) ;
-		if(name.endsWith("y") && !name.endsWith("ay") && !name.endsWith("ey") && !name.endsWith("iy") && !name.endsWith("oy") && !name.endsWith("uy")) {
-			name = name.substring(0,name.lastIndexOf('y')) + "ies";
-		}
-		else if(name.endsWith("x") || name.endsWith("h")) {
+		String name = getName(clazz);
+		if (name.endsWith("y") && !name.endsWith("ay") && !name.endsWith("ey")
+				&& !name.endsWith("iy") && !name.endsWith("oy")
+				&& !name.endsWith("uy")) {
+			name = name.substring(0, name.lastIndexOf('y')) + "ies";
+		} else if (name.endsWith("x") || name.endsWith("h")) {
 			name = name + "es";
-		}
-		else {
+		} else {
 			name = name + "s";
 		}
 		return name;
@@ -136,6 +138,11 @@ public class BaseAction extends ActionSupport implements ParameterAware,
 	protected String getLanguage() {
 		String language = getLocale().getLanguage();
 		return language.indexOf("en") == -1 ? language : null;
+	}
+
+	public User getUser() {
+		return (User) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
 	}
 
 }

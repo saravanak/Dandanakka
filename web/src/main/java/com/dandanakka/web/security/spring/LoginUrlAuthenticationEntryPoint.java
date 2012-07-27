@@ -15,7 +15,9 @@ public class LoginUrlAuthenticationEntryPoint
 			AuthenticationException exception) {
 		String loginUrl = super.determineUrlToUseForThisRequest(request,
 				response, exception);
-		return "/"+request.getRequestURI().split("/")[2]+loginUrl;
+		String applicationName = request.getRequestURI().split("/")[2];
+
+		return "/" + applicationName + loginUrl;
 	}
 
 }

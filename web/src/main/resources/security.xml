@@ -14,14 +14,24 @@
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/**/controlpanel"
 			access="ROLE_USER" />
-		<form-login default-target-url="/welcome"
+		<form-login authentication-success-handler-ref="authenticationSuccessHandler"
 			authentication-failure-url="/loginfailed" />
-		<logout logout-success-url="/logout" />
+		<logout success-handler-ref="logoutSuccessHandler"/>
 	</http>
 
 	<b:bean id="authenticationEntryPoint"
 		class="com.dandanakka.web.security.spring.LoginUrlAuthenticationEntryPoint">
 		<b:property name="loginFormUrl" value="/core/login" />
+	</b:bean>
+	
+	<b:bean id="logoutSuccessHandler"
+		class="com.dandanakka.web.security.spring.SimpleUrlLogoutSuccessHandler">
+		<b:property name="defaultTargetUrl" value="/core/home" />
+	</b:bean>
+	
+	<b:bean id="authenticationSuccessHandler"
+		class="com.dandanakka.web.security.spring.AuthenticationSuccessHandler">
+		<b:property name="defaultTargetUrl" value="/core/home" />
 	</b:bean>
 
 
