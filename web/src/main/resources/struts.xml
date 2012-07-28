@@ -74,6 +74,11 @@
 				<param name="link">${link}</param>
 				<param name="dataId">${dataId}</param>
 			</result>
+			<result type="redirectAction" name="viewpage">
+				<param name="actionName">view</param>
+				<param name="namespace">${application}/core/page</param>
+				<param name="pName">${page}</param>				
+			</result>
 		</action>
 
 

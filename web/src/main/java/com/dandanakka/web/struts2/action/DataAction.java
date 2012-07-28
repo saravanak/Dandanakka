@@ -28,6 +28,15 @@ public class DataAction extends BaseAction {
 	private String template;
 	private String link;
 	private String dataId;
+	private String page;
+
+	public String getPage() {
+		return page;
+	}
+
+	public void setPage(String page) {
+		this.page = page;
+	}
 
 	public String getDataId() {
 		return dataId;
@@ -90,6 +99,7 @@ public class DataAction extends BaseAction {
 		String dataId = getParameter("id");
 		setTemplate(getParameter("tId"));
 		setLink(getParameter("lId"));
+		setPage(getParameter("pId"));
 		if (template != null) {
 			Template templateObj = getDataStore().getObject(Template.class,
 					template);
@@ -112,6 +122,9 @@ public class DataAction extends BaseAction {
 		setDataId(getDataStore().saveData(getSchema().getName(), entity));
 		if (link != null && link.trim().length() != 0) {
 			return "page";
+		}
+		else if (page != null && page.trim().length() != 0) {
+			return "viewpage";
 		}
 		return "save";
 	}

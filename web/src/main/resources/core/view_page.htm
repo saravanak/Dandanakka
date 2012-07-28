@@ -1,5 +1,8 @@
 [#ftl] 
 [#assign content]
+[#if user??]
+<a href="${base}/${application}/core/data/edit?id=${entity.dataId}&pId=${entity.name}&tId=${entity.templateName}">Edit</a><br></br>
+[/#if]
 [#assign root = data/]
 [#include "$$${application}$$/${entity.templateName}"]
 [/#assign]
