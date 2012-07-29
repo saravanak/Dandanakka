@@ -7,6 +7,7 @@ public class Attribute {
 	private String type;
 	private boolean isArray;
 	private boolean isUnique;
+	private boolean isLocaleSpecific;
 	private int index;
 
 	public boolean isUnique() {
@@ -55,6 +56,14 @@ public class Attribute {
 
 	public void setIndex(int index) {
 		this.index = index;
+	}
+
+	public boolean isLocaleSpecific() {
+		return isLocaleSpecific;
+	}
+
+	public void setLocaleSpecific(boolean isLocaleSpecific) {
+		this.isLocaleSpecific = isLocaleSpecific;
 	}
 
 }
