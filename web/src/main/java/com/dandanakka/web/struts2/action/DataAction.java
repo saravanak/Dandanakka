@@ -119,7 +119,7 @@ public class DataAction extends BaseAction {
 
 	protected String save() throws Exception {
 		processEntity(entity);
-		setDataId(getDataStore().saveData(getSchema().getName(), entity));
+		setDataId(getDataStore().saveData(getSchema().getName(),getLanguage(), entity));
 		if (link != null && link.trim().length() != 0) {
 			return "page";
 		}

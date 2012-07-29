@@ -93,7 +93,7 @@ public class PageAction extends PersistenceAction<Page> {
 		setEntity(getDataStore().getObject(Page.class, getParameter("pName")));
 		setData(getDataStore().getDataMap(
 				getDataStore().getObject(Template.class,
-						entity.getTemplateName()).getSchema(),
+						entity.getTemplateName()).getSchema(),getLanguage(),
 				entity.getDataId()));
 		return "view";
 	}

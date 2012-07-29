@@ -14,12 +14,14 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.dandanakka.core.util.ConfigUtil;
 import com.dandanakka.datastore.exception.DataStoreException;
 import com.dandanakka.datastore.model.Application;
+import com.dandanakka.datastore.model.Attribute;
 import com.dandanakka.datastore.model.Id;
 import com.dandanakka.datastore.model.LocaleSpecific;
 import com.dandanakka.datastore.model.Operator;
 import com.dandanakka.datastore.model.PaginatedResult;
 import com.dandanakka.datastore.model.Query;
 import com.dandanakka.datastore.model.Reference;
+import com.dandanakka.datastore.model.Schema;
 
 public abstract class DataStore {
 
@@ -54,7 +56,7 @@ public abstract class DataStore {
 				throw new DataStoreException(
 						"please check config file instance", e);
 			}
-			
+
 		} else {
 			application = getDataStore("application").getObject(
 					Application.class, applicationName);
@@ -191,22 +193,26 @@ public abstract class DataStore {
 			}
 
 			// Set Locale Specific Fields
-
-			String localemarker = "_" + locale;
-			Object[] keys = dataMap.keySet().toArray();
-			for (Object key : keys) {
-				if (key.toString().indexOf(localemarker) != -1) {
-					Object value = dataMap.remove(key);
-					dataMap.put(key.toString().replaceAll(localemarker, ""),
-							value);
-				} else if (key.toString().indexOf('_') != -1) {
-					dataMap.remove(key);
-				}
-			}
+			reconcileLocaleFields(dataMap,locale) ;
+			
 
 			obj = m.convertValue(dataMap, clazz);
 		}
 		return obj;
+	}
+	
+	private void reconcileLocaleFields(Map<String, Object> dataMap,String locale) {
+		String localemarker = "_" + locale;
+		Object[] keys = dataMap.keySet().toArray();
+		for (Object key : keys) {
+			if (key.toString().indexOf(localemarker) != -1) {
+				Object value = dataMap.remove(key);
+				dataMap.put(key.toString().replaceAll(localemarker, ""),
+						value);
+			} else if (key.toString().indexOf('_') != -1) {
+				dataMap.remove(key);
+			}
+		}
 	}
 
 	public List<Field> getReferenceColumns(Class clazz) {
@@ -321,8 +327,10 @@ public abstract class DataStore {
 
 		return paginatedResult;
 	}
+	
 
-	public String saveData(String schemaName, Map<String, Object> dataMap)
+
+	private String saveData(String schemaName, Map<String, Object> dataMap)
 			throws DataStoreException {
 		String generatedId = null;
 		String idName = getIdColumnName();
@@ -408,9 +416,48 @@ public abstract class DataStore {
 		}
 		return fields.toArray(new Field[0]);
 	}
-	
+
 	public void translate(Class clazz) {
+
+	}
+
+	public Map<String, Object> getDataMap(String schemaName, String locale,
+			String id) throws DataStoreException {
+		Map<String, Object> dataMap = getDataMap(schemaName, id);
+		reconcileLocaleFields(dataMap,locale) ;
+		return dataMap;
+	}
+	
+	public void processDataMap(String schemaName,
+			Map<String, Object> dataMap, String locale)
+			throws DataStoreException {
 		
+		Schema schema = getObject(Schema.class, schemaName);
+
+		List<Attribute> attributes = schema.getAttributes() ;
+
+		if (attributes != null) {
+			
+			for (Attribute attribute : attributes) {
+				if(attribute.isLocaleSpecific()) {
+					dataMap.put(attribute.getName() + "_" + locale,
+							dataMap.remove(attribute.getName()));
+				}
+				
+			}
+			
+		}
+
+		// Remove Reference Values
+		//TODO:DO later
+
+
+	}
+	
+	public String saveData(String schemaName, String locale,
+			Map<String, Object> dataMap) throws DataStoreException {
+		processDataMap(schemaName,dataMap,locale) ;
+		return saveData(schemaName,dataMap) ;
 	}
 
 	/**
