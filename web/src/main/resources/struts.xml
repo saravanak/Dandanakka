@@ -106,7 +106,13 @@
 			<result type="redirectAction" name="theme">${application}/core/template/select?category=theme
 			</result>
 		</action>
-
+		<action name="*/*/setting/*" class="com.dandanakka.web.struts2.action.SettingAction"
+			method="{3}">
+			<result type="freemarker" name="input">/core/setting.htm</result>
+			<result type="freemarker" name="list">/core/list_setting.htm</result>
+			<result type="redirectAction" name="save">${application}/core/setting/list
+			</result>
+		</action>
 
 		<!-- Add actions here -->
 
