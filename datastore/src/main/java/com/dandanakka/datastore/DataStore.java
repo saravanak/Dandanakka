@@ -193,22 +193,21 @@ public abstract class DataStore {
 			}
 
 			// Set Locale Specific Fields
-			reconcileLocaleFields(dataMap,locale) ;
-			
+			reconcileLocaleFields(dataMap, locale);
 
 			obj = m.convertValue(dataMap, clazz);
 		}
 		return obj;
 	}
-	
-	private void reconcileLocaleFields(Map<String, Object> dataMap,String locale) {
+
+	private void reconcileLocaleFields(Map<String, Object> dataMap,
+			String locale) {
 		String localemarker = "_" + locale;
 		Object[] keys = dataMap.keySet().toArray();
 		for (Object key : keys) {
 			if (key.toString().indexOf(localemarker) != -1) {
 				Object value = dataMap.remove(key);
-				dataMap.put(key.toString().replaceAll(localemarker, ""),
-						value);
+				dataMap.put(key.toString().replaceAll(localemarker, ""), value);
 			} else if (key.toString().indexOf('_') != -1) {
 				dataMap.remove(key);
 			}
@@ -216,7 +215,7 @@ public abstract class DataStore {
 	}
 
 	public List<Field> getReferenceColumns(Class clazz) {
-		List<Field> fields = new ArrayList<>();
+		List<Field> fields = new ArrayList<Field>();
 		for (Field field : clazz.getDeclaredFields()) {
 
 			Annotation[] annotations = field.getDeclaredAnnotations();
@@ -327,8 +326,6 @@ public abstract class DataStore {
 
 		return paginatedResult;
 	}
-	
-
 
 	private String saveData(String schemaName, Map<String, Object> dataMap)
 			throws DataStoreException {
@@ -417,47 +414,76 @@ public abstract class DataStore {
 		return fields.toArray(new Field[0]);
 	}
 
-	public void translate(Class clazz) {
+	public void translate(String locale, Class clazz) throws DataStoreException {
 
+		if (locale != null) {
+			List<Object> objects = getDataList(clazz);
+			Map<String, Object> dataMap = null;
+			Object valueToTranslate = null;
+			String schemaName = getSchemaName(clazz);
+			Map<String, Object> localeDataMap = null;
+
+			for (Object object : objects) {
+				Field[] fields = getLocaleSpecificFields(clazz);
+				dataMap = getDataMap(object);
+				localeDataMap = new HashMap<String, Object>();
+
+				localeDataMap.put(getIdColumnName(), dataMap.remove(getIdColumn(clazz).getName()));
+				for (Field field : fields) {
+					valueToTranslate = dataMap.get(field.getName());
+					if (valueToTranslate != null
+							&& valueToTranslate instanceof String
+							&& valueToTranslate.toString().trim().length() < 50) {
+
+						localeDataMap.put(field.getName() + "_" + locale,
+								transtale(valueToTranslate.toString(), locale));
+						saveData(schemaName, localeDataMap);
+					}
+				}
+			}
+
+		}
+	}
+
+	private String transtale(String value, String locale) {
+		return value + "_" + locale;
 	}
 
 	public Map<String, Object> getDataMap(String schemaName, String locale,
 			String id) throws DataStoreException {
 		Map<String, Object> dataMap = getDataMap(schemaName, id);
-		reconcileLocaleFields(dataMap,locale) ;
+		reconcileLocaleFields(dataMap, locale);
 		return dataMap;
 	}
-	
-	public void processDataMap(String schemaName,
-			Map<String, Object> dataMap, String locale)
-			throws DataStoreException {
-		
+
+	public void processDataMap(String schemaName, Map<String, Object> dataMap,
+			String locale) throws DataStoreException {
+
 		Schema schema = getObject(Schema.class, schemaName);
 
-		List<Attribute> attributes = schema.getAttributes() ;
+		List<Attribute> attributes = schema.getAttributes();
 
 		if (attributes != null) {
-			
+
 			for (Attribute attribute : attributes) {
-				if(attribute.isLocaleSpecific()) {
+				if (attribute.isLocaleSpecific()) {
 					dataMap.put(attribute.getName() + "_" + locale,
 							dataMap.remove(attribute.getName()));
 				}
-				
+
 			}
-			
+
 		}
 
 		// Remove Reference Values
-		//TODO:DO later
-
+		// TODO:DO later
 
 	}
-	
+
 	public String saveData(String schemaName, String locale,
 			Map<String, Object> dataMap) throws DataStoreException {
-		processDataMap(schemaName,dataMap,locale) ;
-		return saveData(schemaName,dataMap) ;
+		processDataMap(schemaName, dataMap, locale);
+		return saveData(schemaName, dataMap);
 	}
 
 	/**

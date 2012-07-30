@@ -12,29 +12,11 @@
 		<module>datastore</module>
 		<module>datastore-mongodb</module>
 		<module>template</module>
+		<module>web</module>
 		<module>webapp</module>
-		<module>staticwebapp</module>
-    <module>web</module>
+		<module>staticwebapp</module>    
   </modules>
 
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<source>1.7</source>
-						<target>1.7</target>
-						<showDeprecation>true</showDeprecation>
-						<showWarnings>true</showWarnings>
 
-						<fork>true</fork>
-					</configuration>
-
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
 
 </project>

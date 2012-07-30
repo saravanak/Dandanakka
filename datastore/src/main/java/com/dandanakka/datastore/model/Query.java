@@ -19,7 +19,7 @@ public class Query {
 	
 	public void addCriteria(String columnName, Operator operator, Object value) {
 		if(criterias == null) {
-			criterias = new ArrayList<>() ;			
+			criterias = new ArrayList<Criteria>() ;			
 		}
 		criterias.add(new Criteria(columnName, operator, value)) ;
 	}
