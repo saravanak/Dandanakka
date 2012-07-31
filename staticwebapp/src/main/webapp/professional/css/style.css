@@ -1,0 +1,110 @@
+/* @import url('../css/structure.css');*/
+
+/* Headings*/
+h1 {
+	font-size:1.1em;
+	color:#252525;
+	font-weight:bold;
+}
+.app_glob_wel_h1 {
+	color:#e7f5c5;
+	font-weight:bold;
+}
+.txtLink {
+	font-size: 1.1em;
+	color: #3366ff;
+	text-decoration: underline;
+}
+.priBut1, .secBut1 {
+	cursor:pointer;
+	font-size: 1em;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+.priBut1 .lef {
+	background:url(../images/buttons.png) no-repeat 0px 0px;
+	text-align:center;
+}
+.priBut1 .rig {
+	background:url(../images/buttons.png) no-repeat -204px -26px;
+}
+.header_main {
+	background:url(../images/header_bg.jpg) repeat-x
+}
+.logo {
+	background:url(../images/logo.png) no-repeat;
+}
+.header_rig {
+	background:url(../images/header_right.jpg) no-repeat right;
+}
+.header_rig .link {
+	color:#93c2f2;
+	font-weight:normal;
+}
+.header_rig .link a {
+	color:#93c2f2;
+	font-weight:normal;
+	text-decoration:none;
+}
+.header_rig .link a:hover {
+	color:#93c2f2;
+	font-weight:normal;
+	text-decoration:underline;
+}
+.appsTab_gra {
+	background:url(../images/apps_tab_bg.jpg) repeat-x;
+}
+.appsTab_gra li {
+	color:#505050;
+	font-size:1.2em;
+	font-weight:bold;
+	cursor:pointer;
+}
+.appsTab_gra li a {
+	color:#505050;
+	text-decoration:none;
+}
+.appsTab_gra li.sel {
+	cursor:pointer;
+}
+.appsTab_gra li.sel .midbg {
+	background:url(../images/top_tab_navi.jpg) repeat-x;
+	font-weight:bold;
+	border-bottom:1px solid #fff;
+}
+.appsTab_gra li.sel .left {
+	background:url(../images/top_tab_lefshade.png) no-repeat;
+}
+.appsTab_gra li.sel .right {
+	background:url(../images/top_tab_rigshade.png) no-repeat;
+}
+.appsTab_fil {
+	background:url(../images/apps_tab_fil_bg.jpg) repeat-x;
+}
+.appsTab_fil span {
+	font-weight:bold;
+}
+.appsBody_main {
+	background:url(../images/light_shade.jpg) repeat-x;
+}
+
+.footer {
+	position:fixed;
+   bottom:0px;
+   width:100%;
+   background: url("../images/footer_bg.gif") repeat-x scroll center bottom transparent;
+	line-height:24px;
+	white-space:nowrap;
+	color:#3483b8;
+	
+}
+.footer a {
+	font-size:0.9em;
+	color: #3366ff;
+	text-decoration: underline;
+}
+.footHelpTxt {
+	font-size:0.9em;
+	color:#858585;
+}
+

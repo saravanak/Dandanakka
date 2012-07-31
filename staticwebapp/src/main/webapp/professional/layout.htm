@@ -1,0 +1,107 @@
+[#ftl]
+<link rel="stylesheet" type="text/css" href="${base}/../dandanakka-static/professional/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="${base}/../dandanakka-static/professional/css/structure.css"/>
+<link href="${base}/../dandanakka-static/theme/basic/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+<link href="${base}/../dandanakka-static/theme/basic/css/jquery-ui-1.8.1.custom.css" rel="stylesheet" type="text/css" />
+<link href="${base}/../dandanakka-static/theme/basic/css/uni-form.css" rel="stylesheet" type="text/css" />
+<link href="${base}/../dandanakka-static/theme/basic/css/ui.jqgrid.custom.css" rel="stylesheet" type="text/css" />
+<link href="${base}/../dandanakka-static/theme/basic/css/blue.uni-form.css" rel="stylesheet" type="text/css" />
+
+<!--Main DIV Starts-->
+<div class="main">
+  <!--Header DIV Starts-->
+  <div class="header_main"><a href="buttons.html" class="logo"><span>My Logo </span></a>
+    <div class="header_rig">
+      <div class="M_20" align="right">
+      [#if user??] 
+      <span class="app_glob_wel_h1">Welcome ${user.username}</span> | <span class="link"> <a href="${base}/${application}/core/controlpanel">Control Panel</a> |  <a href="${base}/j_spring_security_logout?application=${application}">Signout</a> <!--| <a href="#">Contact Us</a></span> --> </span>
+      
+      [#else]
+  		<span class="link"><a href="${base}/${application}/core/login">Login</a></span>
+  		[/#if]
+  		</div>
+    </div>
+  </div>
+  <!--Header DIV Ends-->
+   
+  <!--Main Navi Starts-->
+  <div class="appsTab_gra"> 
+  <ul>
+  [#list context.links.master as link]
+	[#if link_index ==0]
+  <li id="${link.id}" class="sel">
+   <img src="${base}/../dandanakka-static/professional/images/spacer.gif" class="left" width="8" height="42">
+   <div class="midbg"><a href="${getUrl(link)}">${link.label}</a></div>
+   <img src="${base}/../dandanakka-static/professional/images/spacer.gif" alt="righ" class="right" width="8" height="42">
+  </li>
+  [#else]
+  <li id="${link.id}" ><a href="${getUrl(link)}">${link.label}</a> </li>
+  [/#if]
+  [/#list]
+  </ul>
+  </div>
+  <!--Main Navi Ends-->
+  <!--Filter Div Starts-->
+  <div class="appsTab_fil">
+	
+  <div class="fright">
+   
+[@addLocales/]
+    </div>
+  
+    <!--<div class="fleft fil_M1"><span>Filter By</span></div>
+    <div class="fleft fil_M2">
+      <div class="gloCombo">
+        <div class="lef">All</div>
+        <div class="rig"><img src="${base}/../dandanakka-static/professional/images/spacer.gif" width="13px" height="22px" /></div>
+      </div>
+    </div>
+    <div class="fleft fil_M1">You have used <span>4GB</span> of your available space. </div>-->
+  </div>
+  <!--Filter Div Ends-->
+  <!--Apps Body Div Starts-->
+  <div class="appsBody_main" id="inncon">
+    <!--Apps Inner Body Div Starts-->
+
+${content}
+  </div>
+  <!--Apps Body Div ends-->
+</div>
+<!--Main DIV Ends-->
+<div class="clr"></div>
+<!--Footer DIV Starts-->
+<div class="footer">
+ <span> 
+ 
+ [#if context.links.footer??]
+   [#list context.links.footer as link]
+	[#if link_index !=0] | [/#if]
+  <a href="${getUrl(link)}">${link.label}</a>
+  [/#list]
+  [/#if]
+
+ </span> <span class="footHelpTxt">Copyright © 2010 Dandanakka.</span> </div>
+<!--Footer DIV Ends-->
+
+[#function getUrl link] [#if link.url??] [#return
+link.url] [#elseif link.page??] [#return
+base+'/${application}/core/page/view?pName='+link.page] [#else] [#return
+base+'/${application}/core/link/actions?lId='+link.id] [/#if]
+
+[/#function]
+
+[#macro addLocales]
+  [#local locales= context.locales] 
+ 
+  	[#if locales?? && locales?size >0 ] 
+  	 	[#local locales = locales + [ {"code":"en", "label":"English"}] /]
+	  	[#list locales as localeObj] 
+	  		[#if locale.language != localeObj.code] 
+	  			[@s.url id="url" includeParams="all"]
+					[@s.param name="request_locale"]${localeObj.code}[/@s.param] 
+				[/@s.url]
+				[@s.a href="${url}"]${localeObj.label}[/@s.a] 
+			[/#if] 
+		[/#list] 
+	[/#if]
+[/#macro]

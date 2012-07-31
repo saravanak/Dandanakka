@@ -19,52 +19,13 @@
 
 <body>
 
+
 [#if context.application.theme??]
 	[#include "$$${application}$$/${context.application.theme}"]
 [#else]
-
-<link href="${base}/../dandanakka-static/admin/css/css.css" rel="stylesheet" type="text/css" />
-<link href="${base}/../dandanakka-static/theme/basic/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
-<link href="${base}/../dandanakka-static/theme/basic/css/jquery-ui-1.8.1.custom.css" rel="stylesheet" type="text/css" />
-<link href="${base}/../dandanakka-static/theme/basic/css/uni-form.css" rel="stylesheet" type="text/css" />
-<link href="${base}/../dandanakka-static/theme/basic/css/ui.jqgrid.custom.css" rel="stylesheet" type="text/css" />
-<link href="${base}/../dandanakka-static/theme/basic/css/blue.uni-form.css" rel="stylesheet" type="text/css" />
-
-<div id="container"><!-- container Start-->
-  
-  <div id="topbanner"><!-- topbanner Start-->
-    <div id="logo"><img src="${base}/../dandanakka-static/admin/images/logo.gif" width="81" height="43" alt="" /> Dandanakka</div>
-    <div id="smltxt">
-  	[#if user??]
-    <span>Welcome DHANANJAYAN!</span> <a href="${base}/${application}/core/controlpanel">Control Panel</a> | <a href="${base}/j_spring_security_logout?application=${application}">Logout</a>
-  	[#else]
-  	<a href="${base}/${application}/core/login">Login</a>
-  	[/#if]
-  	</div>
-  </div><!-- topbanner End--> 
-  
-  <div id="topnav"><!-- top-nav Start-->
-  	<ul>
-    	<li><a href="#">Home</a></li>
-    	<li><span>About Us</span></li>
-    	<li><a href="#">Contact US</a></li>          
-  	</ul>
-  </div><!-- top-nav End-->
-  <!-- body Start-->
-  <div id="content">
- ${content}
-  </div>
-  <!-- body End-->
-  
-  <div id="footer"><!-- Footer Start-->
-  	<p>Copyright © 2009 - 2012 dandanakka.com  All Rights Reserved.</p>
-  </div><!-- Footer End-->
-
-</div><!-- container End-->
-
-
-
+[#include "adminlayout.htm"]
 [/#if]
+
 
 
 </body>

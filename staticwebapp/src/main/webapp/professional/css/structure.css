@@ -1,0 +1,1880 @@
+@charset "utf-8";
+/* Global */
+
+body, td, th {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.75em;
+	color: #333333;
+}
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+img {
+	border:none;
+}
+li {
+	list-style:none;
+}
+ol {
+	line-height:25px;
+	padding:20px;
+}
+* {
+	padding:0px;
+	margin:0px;
+}
+.clr {
+	clear:both;
+	line-height:0px;
+}
+.curpoint {
+	cursor:pointer;
+}
+.fleft {
+	float:left;
+}
+.fnone {
+	float:none;
+}
+.fright {
+	float:right; padding-top:10px; padding-right:10px;
+}
+.out1 {
+	outline:#000;
+}
+.hidden {
+	display:none
+}
+.nowrap {
+	white-space:nowrap;
+}
+.textRight {
+	text-align:right
+}
+.noBorder {
+	border:0px solid none;
+}
+/*Heading*/
+
+
+/*Buttons Structure Starts*/
+.priBut1, .secBut1 {
+	float:left;
+}
+.priBut1 .lef {
+	float:left;
+	height:20px;
+	padding:5px 10px 0 17px;
+}
+.priBut1 .rig {
+	float:left;
+	width:7px;
+	height:25px;
+}
+.secBut1 .lef {
+	float:left;
+	height:20px;
+	padding:5px 10px 0 17px;
+}
+.secBut1 .rig {
+	float:left;
+	width:7px;
+}
+.triBut1 {
+	float:left;
+}
+.triBut1 .lef {
+	float:left;
+	height:20px;
+	padding:5px 10px 0 17px;
+}
+.triBut1 .rig {
+	float:left;
+	width:7px;
+}
+.smallBut1 {
+	float:left;
+}
+.smallBut1 .lef {
+	float:left;
+	height:19px;
+	padding:4px 7px 0 12px;
+}
+.smallBut1 .rig {
+	float:left;
+	width:5px;
+}
+/* popbuttons*/
+.popPriBut1 {
+	float:left;
+}
+.popPriBut1 .lef {
+	float:left;
+	height:20px;
+	padding:5px 20px 0 27px;
+}
+.popPriBut1 .rig {
+	float:left;
+	width:7px;
+}
+.popTriBut1 {
+	float:left;
+}
+.popTriBut1 .lef {
+	float:left;
+	height:20px;
+	padding:5px 20px 0 27px;
+}
+.popTriBut1 .rig {
+	float:left;
+	width:7px;
+}
+/* popbuttons*/
+/* Buttons Structures Ends*/
+
+/* Combobox Structure */
+.gloCombo {
+	height:22px;
+	float:left;
+}
+.gloCombo .lef {
+	float:left;
+	height:18px;
+	padding:4px 7px 0px 12px;
+	min-width:70px;
+}
+.gloCombo .rig {
+	float:left;
+	width:13px;
+	height:22px;
+}
+/*Margins*/
+.M_20 {
+	margin:20px 20px 0px 0px;
+}
+.mL_5 {
+	margin:0px 0px 0px 5px;
+}
+.mL_15 {
+	margin:0px 0px 0px 15px;
+}
+.mT_6 {
+	margin:6px 0px 0px 0px;
+}
+.mT_8 {
+	margin:8px 0px 0px 0px;
+}
+.mT_12 {
+	margin:12px 0px 0px 0px;
+}
+
+.mR_22 {
+	margin:0px 22px 0px 0px;
+}
+
+
+.mL_210 {
+	margin-left:210px
+}
+.mL_10 {
+	margin-left:10px
+}
+/*Paddings*/
+.Pad_7 {
+	padding:7px 0px 0px 0px;
+}
+.pT_9 {
+	padding:9px 0px 0px 0px;
+}
+.P_8 {
+	padding:8px 0px 0px 8px;
+}
+.PB_20 {
+	padding:0px 0px 20px 0px;
+}
+.PR_22 {
+	padding:0px 22px 0px 0px;
+}
+.pB_10 {
+	padding:0px 0px 10px 0px;
+}
+.Pag_P5 {
+	padding:5px 5px 0px 5px;
+}
+/*Structure*/
+.main {
+	width:100%;
+	height:auto;
+}
+.header_main {
+	height:59px;
+	width:100%;
+	min-width:980px;
+}
+.logo {
+	float:left;
+	width:473px;
+	height:59px;
+	cursor:pointer;
+	display:block;
+}
+.logo span {
+	display:none;
+}
+.header_rig {
+	float:right;
+	height:59px;
+	width:auto;
+}
+.glo_apps_list {
+	height:85px;
+	min-width:980px;
+}
+.glo_apps_list .left {
+	margin:0px 0px 0px 12px;
+	min-width:500px;
+	float:left;
+}
+.glo_apps_list .left li {
+	display:inline;
+}
+.glo_apps_list .right {
+	margin:0px 10px 0px 0px;
+	float:right;
+}
+.gloHeader_bg {
+	height:28px;
+}
+.gloHeader_bg .leftimg {
+	height:28px;
+	width:12px;
+	float:left;
+}
+.files_list {
+	height:582px;
+}
+.files {
+	height:57px;
+}
+.files:hover {
+	height:57px;
+}
+.filesWordIco {
+	margin:15px 10px 0px 15px;
+}
+.filesFolderIco {
+	margin:15px 10px 0px 15px;
+}
+.files_content {
+	margin:15px 10px 0px 0px;
+}
+.files li {
+	list-style:none;
+}
+/*Main Navigation Structures Starts*/
+.appsTab_gra {
+	height:43px;
+	min-width:980px;
+}
+.appsTab_gra ul {
+	list-style:none;
+}
+.appsTab_gra li {
+	float:left;
+	padding:13px 15px 0px 15px;
+	height:29px;
+}
+.appsTab_gra li.sel {
+	padding:0px;
+}
+.appsTab_gra li.sel .midbg {
+	height:29px;
+	float:left;
+	padding:13px 15px 0 15px;
+}
+.appsTab_gra li.sel .left {
+	height:42px;
+	float:left;
+	width:8px;
+}
+.appsTab_gra li.sel .right {
+	height:42px;
+	float:left;
+	width:8px;
+}
+/*Main Navigation Structures Ends*/
+
+
+.appsTab_fil {
+	height:39px;
+	min-width:980px;
+}
+.fil_M1 {
+	margin:12px 0px 0px 20px;
+}
+.fil_M2 {
+	margin:9px 0px 0px 10px;
+}
+
+.fil_M3 {
+	margin:12px 20px 0px 10px;
+}
+.appsBody_main {
+	padding:20px;
+	min-width:940px;
+}
+.appsBody_inner {
+	min-width:940px;
+}
+.appsBody_inner .leftcol {
+	height:630px;
+	width:362px;
+}
+.appsBody_mid_col {
+	position: absolute;
+	left: 380px;
+	width: 60%;
+	min-width:600px;
+}
+.appsBody_inner .rightcol {
+	float:left;
+	width:580px;
+	height:650px;
+}
+.appsBody_inner .top_right {
+	height:33px;
+	position:relative;
+	left:1px;
+}
+.appsInnerPagi {
+	height:40px;
+}
+.apps_in_bot {
+	width:100%;
+	height:30px;
+}
+.apps_in_bot .left_img {
+	float:left;
+	height:30px;
+	width:362px;
+}
+.apps_in_bot .leftcol {
+	float:left;
+}
+.toprightcol2 {
+	position:relative;
+	right:-1px;
+	width:13px;
+	height:33px;
+}
+.botrightcol2 {
+	position:relative;
+	right:-1px;
+	width:19px;
+	height:30px;
+}
+/*Pagination Structures Starts*/
+.apps_file_pag {
+	float:right;
+	padding:7px;
+	width:100px;
+}
+.apps_file_pag .forward {
+	display:block;
+	width:25px;
+	height:25px;
+}
+.apps_file_pag .forward span {
+	display:none;
+}
+.apps_file_pag .prev {
+	display:block;
+	width:25px;
+	height:25px;
+}
+.apps_file_pag .prev span {
+	display:none;
+}
+/*Pagination Structures Ends*/
+
+/*TopMenu Structure Starts*/
+.newtopmenu {
+	height:29px;
+	float:right;
+}
+.newtopmenu .calendar {
+	float:left;
+	height:29px;
+	width:87px;
+	padding:0px 0px 0px 8px;
+	cursor:pointer;
+}
+.newtopmenu .calendar:hover {
+	height:29px;
+	width:87px;
+	cursor:pointer;
+}
+.newtopmenu .calsel {
+	height:29px;
+	float:left;
+	width:87px;
+	padding:0px 0px 0px 8px;
+	cursor:pointer;
+}
+.newtopmenu .calicon {
+	float:left;
+	width:15px;
+	height:27px;
+}
+.newtopmenu .contacts {
+	float:left;
+	height:29px;
+	width:83px;
+	padding:0px 0px 0px 8px;
+	cursor:pointer
+}
+.newtopmenu .contacts:hover {
+	height:29px;
+	width:83px;
+	cursor:pointer
+}
+.newtopmenu .contacticon {
+	float:left;
+	width:15px;
+	height:27px;
+}
+.newtopmenu .myprofileicon {
+	float:left;
+	width:15px;
+	height:27px;
+}
+.newtopmenu .txt {
+	float:left;
+	padding:8px 0px 0px 5px;
+}
+.newtopmenu .divider {
+	height:29px;
+	width:2px;
+	float:left;
+}
+.newtopmenu .Myprofile {
+	float:left;
+	height:29px;
+	width:86px;
+	padding:0px 0px 0px 8px;
+	cursor:pointer;
+}
+.newtopmenu .Myprofile:hover {
+	height:29px;
+	width:86px;
+	cursor:pointer;
+}
+.newtopmenu .Mybuddies {
+	float:left;
+	height:29px;
+	width:139px;
+	padding:0px 0px 0px 8px;
+	cursor:pointer
+}
+.newtopmenu .Mybuddies:hover {
+	height:29px;
+	width:139px;
+	cursor:pointer
+}
+.newtopmenu .MybuddiesIcon {
+	float:left;
+	width:15px;
+	height:27px;
+}
+/*TopMenu Structure Ends*/
+
+
+/*Details Structure Starts*/
+.Details_cont {
+	margin:30px 0px 0px 30px;
+	min-width:200px;
+}
+.Details_cont li {
+	list-style:none;
+	display:block;
+	height:36px;
+}
+.Details_cont h1 {
+	float:left;
+	width:100px;
+	height:36px;
+}
+.Details_cont h2 {
+	height:36px;
+}
+.Details_but {
+	padding:17px 0px 0px 0px;
+	margin:30px 0px 0px 0px;
+	height:27px;
+	min-width:575px;
+}
+/*Details Structure Ends*/
+/*ShareContent Structure Starts*/
+
+.shareCont .topRt {
+	top:-1px;
+	right:-1px;
+	display:block;
+	width:10px;
+	height:10px;
+	position:absolute;
+}
+.shareCont .topLt {
+	top:-1px;
+	left:-1px;
+	display:block;
+	width:10px;
+	height:10px;
+	position:absolute;
+}
+.shareCont .btmRt {
+	bottom:-1px;
+	right:-1px;
+	display:block;
+	width:10px;
+	height:10px;
+	position:absolute;
+}
+.shareCont .btmLt {
+	bottom:-1px;
+	left:-1px;
+	display:block;
+	width:10px;
+	height:10px;
+	position:absolute;
+}
+.shareCont .heading {
+	padding:10px 0px 0px 15px;
+	height:25px;
+}
+.shareCont .body {
+	height:150px;
+}
+.shareCont .body p {
+	margin:5px 0px 5px 15px;
+}
+.shareCont .textbox1 {
+	padding:3px;
+	height:19px;
+	width:300px;
+}
+.shareCont .textbox2 {
+	padding:3px;
+	height:19px;
+	width:430px;
+	color:#8e8e8e;
+}
+.shareCont .butpad {
+	padding:0px 15px 0px 15px;
+}
+.shareCont .table {
+	margin:15px;
+	height:174px;
+}
+.shareCont .table ul {
+	height:28px;
+}
+.shareCont .table li {
+	float:left;
+	display:block;
+	padding:7px 0px 7px 15px;
+}
+.shareCont .table li.colla {
+	width:194px;
+}
+.shareCont .table li.write {
+	width:80px;
+	padding:7px 0px 7px 9px;
+}
+.shareCont .table li.status {
+	width:40px;
+	padding:7px 0px 7px 9px;
+}
+.shareCont .table li.comments {
+	width:70px;
+	padding:7px 0px 7px 9px;
+}
+.shareCont .white ul {
+	width:100%;
+	height:28px;
+}
+.shareCont .white ul.lastchild {
+	width:100%;
+	height:28px;
+}
+.shareCont .white li.mailid {
+	width:194px;
+}
+.shareCont .white li.write {
+	width:80px;
+	height:21px;
+	padding:8px 0px 0px 9px
+}
+.shareCont .white li.status {
+	width:40px;
+}
+.shareCont .white li.comments {
+	width:70px;
+}
+.shareCont .white li.unread {
+	width:80px;
+	border:none;
+	padding:7px 0px 7px 9px;
+}
+.shareCont .gray li.mailid {
+	width:194px;
+}
+.shareCont .gray li.write {
+	width:80px;
+	padding:8px 0px 0px 9px;
+	height:21px;
+}
+.shareCont .gray li.status {
+	width:40px;
+}
+.shareCont .gray li.comments {
+	width:70px;
+}
+.shareCont .gray li.unread {
+	width:60px;
+	border:none;
+	padding:7px 0px 7px 9px;
+}
+.shareCont .gray ul {
+	width:100%;
+	height:28px;
+}
+/*ShareContent Structure Ends*/
+
+
+/*Global Search Structure Starts*/
+.gol_search {
+	height:42px;
+	margin-top:11px;
+	float:right;
+	width:187px;
+}
+.gol_search .lefCur {
+	float:left;
+	width:7px;
+	height:28px;
+}
+.gol_search .mid {
+	height:28px;
+	width:150px;
+}
+.gol_search input {
+	margin:4px 0px 0px 0px;
+	height:18px;
+	outline:none;
+}
+.gol_search .searchBut {
+	width:27px;
+	height:28px;
+	float:left;
+}
+.gol_search .searchBut span {
+	display:none;
+}
+/*Global Search Structure Ends*/
+
+/*Tab Structures*/
+.tabbox, .selBut_L, .selBut_R {
+	margin:0px;
+	padding:0px;
+}
+.tabhead {
+	height:32px;
+	min-width:400px;
+	padding:0px 0px 0px 12px;
+}
+.tabhead ul {
+	margin:6px 0px 0px 0px;
+}
+.tabhead li {
+	list-style:none;
+	float:left;
+}
+.selBut, .norbut {
+	float:left;
+	margin:0px 4px 0px 0px;
+}
+.selBut_L, .selBut_R, .nor_lbut, .nor_rbut {
+	float:left;
+	width:10px;
+	height:27px;
+}
+.selBut_M {
+	padding:6px 8px 0px 8px;
+	float:left;
+	cursor:pointer;
+	height:21px;
+}
+.nor_mbut {
+	padding:6px 8px 0px 8px;
+	float:left;
+	cursor:pointer;
+	height:21px;
+}
+.tabcont {
+	margin:0px;
+}
+.innertab {
+	width:100%;
+}
+.innertab .top {
+	height:13px;
+}
+/*Tab Structures Ends*/
+
+
+/*Comment Structure Starts*/
+.comPad {
+	padding:28px 30px 0px 30px;
+}
+.comContent {
+	width:100%;
+}
+.comContent .top {
+	height:13px;
+}
+.comContent .top .L {
+	height:13px;
+	width:13px;
+	float:left;
+}
+.comContent .top .R {
+	height:13px;
+	width:13px;
+	float:right;
+}
+.comContent .edit {
+	min-width:450px;
+}
+.comContent .img {
+	padding:0px 22px 0px 22px;
+	float:left;
+}
+.comContent .txtbox_div {
+	width:56%;
+	min-width:100px;
+}
+.comContent .txtbox {
+	height:61px;
+	width:100%;
+}
+.comContent .butPad {
+	margin:35px 0px 0px 10px;
+}
+.horiShade {
+	margin:15px 0px 0px 0px;
+	height:57px;
+}
+.horiShade .left {
+	width:122px;
+	height:57px;
+	float:left;
+}
+.horiShade .righ {
+	float:right;
+	width:140px;
+}
+.comment_list {
+	padding:0px 20px 0px 20px;
+}
+.comment_list li {
+	height:66px;
+	padding:7px 0px 0px 0px;
+	min-width:400px;
+}
+.comContent .botpag {
+	height:32px;
+	padding:0px 15px 0px 0px;
+}
+.comContent .bot {
+	height:14px;
+}
+.comContent .bot .L {
+	height:14px;
+	width:26px;
+	float:left;
+}
+.comContent .bot .R {
+	height:14px;
+	width:26px;
+	float:right;
+}
+/*Comment Structure Ends*/
+
+/*PopUp Structure Starts*/
+.popMain {
+	width:520px;
+	margin:auto;
+}
+.popMain .top {
+	height:31px;
+}
+.popMain .topmid {
+	height:31px;
+	width:480px;
+	float:left;
+}
+.popMain .tpL {
+	float:left;
+	width:16px;
+	height:31px;
+}
+.popMain .tpR {
+	float:left;
+	width:22px;
+	height:31px;
+}
+.popMain .close {
+	float:right;
+	width:16px;
+	height:16px;
+}
+.popMain .bodymain {
+	min-height:114px;
+}
+.popMain .bL {
+	float:left;
+	width:3px;
+	min-height:114px;
+}
+.popMain .bR {
+	float:left;
+	width:9px;
+	min-height:114px;
+}
+.popMain .bM {
+	float:left;
+	min-height:114px;
+	width:506px;
+}
+.bM .content {
+	margin:30px 0px 0px 0px;
+	height:50px;
+}
+.bM .buttons {
+	margin:auto;
+	text-align:center;
+	width:32%
+}
+.popMain .bot {
+	height:20px;
+}
+.popMain .botL {
+	height:20px;
+	width:20px;
+	float:left;
+}
+.popMain .botM {
+	height:20px;
+	width:478px;
+	float:left;
+}
+.popMain .botR {
+	height:20px;
+	width:20px;
+	float:left;
+}
+/*PopUp Structure Ends*/
+
+/*PopUp2 Structure Starts*/
+.popMain2 {
+	width:517px;
+	margin:auto;
+}
+.popMain2 .top {
+	height:31px;
+}
+.popMain2 .topmid {
+	height:31px;
+	width:479px;
+	float:left;
+}
+.popMain2 .tpL {
+	float:left;
+	width:16px;
+	height:31px;
+}
+.popMain2 .tpR {
+	float:left;
+	width:22px;
+	height:31px;
+}
+.popMain2 .close {
+	float:right;
+	width:16px;
+	height:16px;
+}
+.popMain2 .bodymain .cont {
+	min-height:114px;
+	margin:0 9px 0 3px;
+}
+.popMain2 .bodymain .conTxt {
+	padding:25px 15px 20px 15px;
+}
+.popMain2 .bodymain .but {
+	margin:15px auto 0px auto;
+}
+.popMain2 .bot {
+	height:20px;
+}
+.popMain2 .botL {
+	height:20px;
+	width:20px;
+	float:left;
+}
+.popMain2 .botM {
+	height:20px;
+	width:477px;
+	float:left;
+}
+.popMain2 .botR {
+	height:20px;
+	width:20px;
+	float:left;
+}
+/*PopUp2 Structure Ends*/
+
+
+
+/*information bar Structure Starts */
+.conformBox, .successBox, .alertBox {
+	width:630px;
+	margin:auto;
+	height:29px;
+}
+.conformBox .left {
+	width:22px;
+	height:29px;
+	float:left;
+}
+.conformBox .right {
+	width:27px;
+	height:29px;
+	float:left;
+	cursor:pointer;
+}
+.conformBox .mid {
+	height:22px;
+	width:571px;
+	float:left;
+	padding:7px 0px 0px 10px;
+}
+.successBox .left {
+	width:22px;
+	height:29px;
+	float:left;
+}
+.successBox .right {
+	width:27px;
+	height:29px;
+	float:left;
+	cursor:pointer;
+}
+.successBox .mid {
+	height:22px;
+	width:571px;
+	float:left;
+	padding:7px 0px 0px 10px;
+}
+.alertBox .left {
+	width:23px;
+	height:29px;
+	float:left;
+}
+.alertBox .right {
+	width:27px;
+	height:29px;
+	float:left;
+	cursor:pointer;
+}
+.alertBox .mid {
+	height:22px;
+	width:570px;
+	float:left;
+	padding:7px 0px 0px 10px;
+}
+/*information bar Structure Ends */
+
+/*Getting Started Starts*/
+.gettingStart {
+	width:100%;
+	min-width:960px;
+}
+.gettingStart .top {
+	height:26px;
+}
+.gettingStart .top .left {
+	width:10px;
+	height:26px;
+	float:left;
+}
+.gettingStart .top .right {
+	width:10px;
+	height:26px;
+	float:right;
+}
+.gettingStart .top h1 {
+	padding:5px 0px 0px 0px;
+}
+.gettingStart .body {
+	min-height:470px;
+}
+.gettingStart .body_con {
+	width:100%;
+	padding:30px 0px 0px 0px;
+}
+.gettingStart .body_con h4 {
+	padding:5px 0px 5px 0px;
+}
+.gettingStart .body_con .leftCol {
+	width:36%;
+	float:left;
+}
+.gettingStart .body_con .leftCol ul {
+	padding:10px 0px 15px 10px;
+}
+.gettingStart .body_con .leftCol li {
+	list-style:none;
+	padding:7px 0px 7px 0px;
+}
+.gettingStart .body_con .leftCol li a {
+	padding:0px 0px 0px 10px;
+}
+.gettingStart .body_con .righCol {
+	width:57%;
+	float:right;
+	padding:0px 30px 0px 0px;
+}
+.gettingStart .bot {
+	height:10px;
+}
+.gettingStart .bot .left {
+	width:10px;
+	height:10px;
+	float:left;
+}
+.gettingStart .bot .right {
+	width:10px;
+	height:10px;
+	float:right;
+}
+.vertical_shade {
+	width:16px;
+	height:328px;
+	float:left;
+}
+.Inrect {
+	width:340px;
+	margin:40px 0px 0px 0px;
+}
+.Inrect .tp {
+	height:20px;
+	width:auto;
+}
+.Inrect .tp .lef {
+	height:20px;
+	width:20px;
+	float:left;
+}
+.Inrect .tp .mid {
+	height:19px;
+	min-width:300px;
+	float:left;
+}
+.Inrect .tp .rig {
+	height:20px;
+	width:20px;
+	float:left;
+}
+.Inrect .bod {
+	padding:0px 0px 0px 20px;
+}
+.Inrect .bt .lef {
+	height:20px;
+	width:20px;
+	float:left;
+}
+.Inrect .bt .mid {
+	height:19px;
+	min-width:300px;
+	float:left;
+}
+.Inrect .bt .rig {
+	height:20px;
+	width:20px;
+	float:left;
+}
+/*Getting Started Ends*/
+
+/*Outer Rectangle Starts*/
+.OuterRec {
+	padding:8px;
+	position:relative;
+	margin:0 0 0px 0;
+}
+.OuterRec .topRt {
+	top:-1px;
+	right:-1px;
+	display:block;
+	width:10px;
+	height:10px;
+	position:absolute;
+}
+.OuterRec .topLt {
+	top:-1px;
+	left:-1px;
+	display:block;
+	width:10px;
+	height:10px;
+	position:absolute;
+}
+.OuterRec .btmRt {
+	bottom:-1px;
+	right:-1px;
+	display:block;
+	width:10px;
+	height:10px;
+	position:absolute;
+}
+.OuterRec .btmLt {
+	bottom:-1px;
+	left:-1px;
+	display:block;
+	width:10px;
+	height:10px;
+	position:absolute;
+}
+.OuterRec .heading {
+	margin:0px 10px 0px 10px;
+	height:30px;
+}
+/*Outer Rectangle Ends*/
+
+/*Meeting Table Starts*/
+.meeTable {
+	width:580px;
+	height:220px;
+}
+.meeTable .head {
+	height:28px;
+}
+.meeTable .head .pad1 {
+	padding:5px 0px 0px 14px;
+}
+.meeTable .head .pad2 {
+	padding:3px 8px 0px 0px;
+}
+.meeTable .tit {
+	width:100%;
+	height:36px;
+}
+.meeTable .tit input {
+	width:490px;
+	padding:3px;
+}
+.meeTable .white {
+	width:100%;
+	height:36px;
+}
+.meeTable .gray {
+	width:100%;
+	height:36px;
+}
+.meeTable .lastchild {
+	width:100%;
+	height:36px;
+}
+.meeTable ul li {
+	float:left;
+	display:block;
+}
+.meeTable ul li.mailid {
+	width:519px;
+	padding:10px 0px 0px 15px;
+}
+.meeTable ul li.close {
+	padding:10px 0px 0px 15px;
+}
+.meeContent {
+	margin:30px 0px 0px 30px;
+}
+.meeContent .startmain {
+	width:auto;
+}
+.meeContent .audio {
+	height:120px;
+	width:auto;
+}
+.meeContent .audio_right {
+	margin:0px 0px 0px 160px;
+	line-height:25px;
+}
+.dial_div {
+	height:60px;
+}
+.audio_right .dialtxt {
+	float:left;
+	padding:0px 0px 0px 20px;
+	width:103px;
+}
+.audio_right .dialtxt input {
+	width:103px;
+	padding:4px;
+}
+.meeContent .lefttxt {
+	float:left;
+	width:160px;
+}
+.inviteeRight {
+	margin:0px 0px 0px 160px;
+}
+.meeContent .right {
+	margin:0px 0px 0px 160px;
+}
+.meeContent .right input {
+	width:380px;
+	padding:5px;
+}
+.meeContent .but_div {
+	margin:20px 0px 0px 0px;
+}
+/*Meeting Table Ends*/
+
+/*SignIn & SignOff Icons Starts*/
+.signIn {
+	height:10px;
+	width:10px;
+	float:left;
+	padding:0px 10px 0px 0px;
+}
+.signOff {
+	height:10px;
+	width:10px;
+	float:left;
+	padding:0px 10px 0px 0px;
+}
+/*SignIn & SignOff Icons Ends*/
+
+/*Horizontal Shade Starts*/
+.horishade2 {
+	min-height:70px;
+	margin:0px 10px 0px 10px;
+}
+.horishade2 .left {
+	float:left;
+	height:66px;
+	width:50%;
+}
+.horishade2 .right {
+	float:right;
+	height:66px;
+	width:216px;
+}
+.horishade2 .left a {
+	margin:0px 0px 0px 25px;
+}
+.horishade2 .left span {
+	margin-left:25px;
+}
+.horishade2 .left img {
+	float:left;
+}
+/*Horizontal Shade Ends*/
+/*File share me Starts*/
+.pT20 {
+	padding:20px 0px 0px 0px;
+}
+.pLTR {
+	padding:3px 13px 0px 13px;
+}
+.postComment {
+	margin:0px 13px 0px 13px;
+	min-width:920px;
+}
+.postComment img {
+	float:left;
+}
+.postComment textarea {
+	height:45px;
+	width:76%;
+	float:left;
+	margin:0px 0px 0px 22px;
+}
+.fileShareToppag {
+	margin:20px 13px 0px 13px;
+	height:45px;
+}
+.fileShareBotpag {
+	margin:0px 13px 0px 13px;
+	height:45px;
+}
+/*File share me Ends*/
+
+/*File Upload Popup Starts */
+.descripFolder {
+	padding:10px 12px 0px 12px;
+}
+.descripFolder input {
+	width:474px;
+	padding:2px;
+}
+.fileUploadMain {
+	margin:20px 0px 0px 0px;
+}
+.fileProg li.prog {
+	padding:0px 0px 0px 25px;
+}
+.fileProg li.filesize {
+	padding:0px 53px 0px 5px
+}
+.fileDesc {
+	margin:0px 0px 0px 25px;
+}
+.fileDesc ul {
+	padding:0px 0px 0px 0px;
+}
+.fileDesc li {
+	float:left;
+}
+.fileDesc li.add {
+	width:100px;
+}
+.fileDesc li.save {
+	width:42px;
+	padding:0px 0px 0px 5px;
+}
+.fileDesc li input {
+	width:245px;
+	padding:2px;
+	float:left;
+}
+.fileDesc li textarea {
+	width:245px;
+	padding:2px;
+	float:left;
+	height:50px;
+}
+/*File Upload Popup Ends */
+
+/*Big Calendar starts */
+
+.calRightPanel {
+	float:left;
+	width:77.6%;
+}
+.bigCalendar {
+	margin:0px 0px 15px 1.5%;
+}
+.head {
+	height:26px;
+}
+.head li {
+	float:left;
+	width:20%;
+	height:21px;
+	padding:5px 0px 0px 0px;
+}
+*+html .head li {
+	float:left;
+	width:20%;
+	height:21px;
+	padding:5px 0px 0px 0px;
+}
+*+html .tbody li {
+	float:left;
+	height:85px;
+	width:20%;
+	padding:5px 0px 0px 0px;
+}
+.tbody li {
+	float:left;
+	height:85px;
+	width:19%;
+	padding:5px 1% 0px 0px;
+}
+.shareCal {
+	margin:0px 0px 15px 0px;
+}
+.shareCaltitle {
+	height:20px;
+	padding:5px 0px 0px 8px;
+}
+.shareCal .cont ul {
+	padding:15px;
+}
+.shareCal .cont li {
+	padding:4px 0px 4px 4px;
+}
+*+html .shareCal .cont li {
+	padding:2px 0px 2px 0px;
+}
+/*.panel_left {
+	float:left;
+	margin-left:1%;
+	width:20%;
+}*/
+.panel_left {
+	float:left;
+	margin-left:1%;
+	width:186px;
+}
+
+.main31 {
+	margin:15px 0px 0px 0px;
+	min-width:960px;
+}
+.headfree {
+	padding:5px 0px 0px 8px;
+	height:21px;
+	text-align:left;
+}
+.myFreeLP {
+	height:90px;
+	width:13.8%;
+	float:left;
+}
+.myFreeLPG {
+	width:13.8%;
+	float:left;
+	height:167px;
+}
+.DM {
+	height:26px;
+	padding:7px 0px 0px 0px;
+}
+.myfreeName {
+	height:28px;
+	padding:10px 0px 0px 7px;
+}
+
+.time {
+	float:left;
+	width:7%;
+	height:70px;
+}
+.time p {
+	padding:5px 5px 0px 0px;
+	margin:0px 0px 0px 0px;
+}
+
+.pR_freebusy {
+	width:86%;
+	float:left;
+	overflow:auto;
+	height:90px;
+}
+.pR_freebusy .overflow {
+	width:1944px;
+}
+.pRg_freebusy .overflow {
+	width:1944px;
+}
+.pRg_freebusy {
+	width:86%;
+	float:left;
+	overflow:auto;
+	height:167px;
+}
+
+.freeBusy {
+	width:174px;
+	height:26px;
+	margin:15px 0px 0px 0px;
+	padding:7px 0px 0px 10px;
+}
+.freetimeMain {
+	width:79px;
+	float:left;
+	clear:right;
+}
+.freetimeHead {
+	height:26px;
+	padding:7px 0px 0px 0px;
+	display:block;
+}
+.timeli {
+	height:38px;
+}
+.timeli li {
+	float:left;
+	height:38px;
+	width:19px;
+	cursor:pointer;
+}
+.panel_day {
+	height: 730px;
+	overflow:auto;
+}
+.head3 {
+	padding:0px 0px 0px 7%;
+	height:26px;
+}
+.head5 {
+	padding-left:0px 0px 0px 7%;
+	height:26px;
+}
+.head5 li {
+	float:left;
+	height:21px;
+	width:18.2%;
+	padding:5px 0px 0px 0px;
+}
+.head5 li.first {
+	float:left;
+	height:21px;
+	width:6.8%;
+}
+.head5 li.last {
+	float:left;
+	height:21px;
+	width:1%;
+}
+
+.head3 li {
+	float:left;
+	height:21px;
+	width:13.85%;
+	padding:5px 0px 0px 0px;
+}
+*html .head3 li {
+	float:left;
+	height:21px;
+	width:14%;
+	padding:5px 0px 0px 0px;
+}
+.head3_li_select {
+	float:left;
+	height:21px;
+	width:13.7%;
+	padding:5px 0px 0px 0px;
+	height:26px;
+}
+*html .head3_li_select {
+	float:left;
+	height:21px;
+	width:14%;
+	padding:5px 0px 0px 0px;
+	height:26px;
+}
+
+
+.newEvents {
+	margin:9px 0px 0px 12px;
+	float:left;
+}
+.calmaps {
+	margin:auto;
+	width:30%;
+}
+.calmaps .busy {
+	float:left;
+	width:15px;
+	height:15px;
+}
+.calmaps .free {
+	float:left;
+	width:15px;
+	height:15px;
+}
+/*Big Calendar Ends */
+
+/*Calendar Months and Years display Panel Starts*/
+.calMDP {
+	float:left;
+	margin:5px 30px 0px 42px;
+}
+.calMDPM {
+	float:left;
+	height:33px;
+	padding:0px 0px 0px 0px;
+}
+.calMDPM ul {
+	padding:0px;
+	margin:0px;
+}
+.calMDPM li {
+	float:left;
+	color:#689107;
+	font-size:1em;
+	font-weight:bold;
+	padding:9px 0px 0px 0px;
+	margin:0px;
+	height:12px;
+}
+.calMDPM li.txt {
+	width:180px;
+}
+
+
+.calMDPM li.first, .calMDPM li.prev, .calMDPM li.next, .calMDPM li.last {
+	padding:9px 10px 0px 10px;
+}
+/*Calendar Months and Years display Panel Ends*/
+
+
+
+
+/*Share Calendar Popup Starts*/
+.scCont {
+	padding:15px 20px 0px 20px;
+}
+.scCont input {
+	padding:2px;
+	width:461px;
+}
+.scCont textarea {
+	padding:2px;
+	width:461px;
+	min-height:60px;
+}
+.scCont li {
+	padding:7px 0px 7px 0px
+}
+/*Share Calendar Popup Ends*/
+
+/*Share Calendar Create Events Starts*/
+
+.scCreateEvent ul {
+	padding:20px 22px 0px 22px;
+}
+.scCreateEvent li {
+	padding:7px 0px 7px 0px;
+	clear:both;
+	min-height:25px;
+}
+.scCreateEvent h1 {
+	width:150px;
+	float:left;
+	padding:5px 0px 0px 0px;
+}
+.scCreateEvent h2 {
+	float:left;
+}
+.scCreateEvent input {
+	padding:4px;
+	width:320px;
+}
+.scCreateEvent textarea {
+	padding:4px;
+	width:325px;
+}
+.scCreateEvent .but {
+	padding:12px 0px 8px 0px;
+}
+.scCreateEvent .check {
+	width:auto;
+}
+/*Share Calendar Create Events Ends*/
+
+/*Tool Tip Structures Starts*/
+.toolTip {
+	width:406px;
+	position:relative;
+	left:50px;
+	top:50px;
+}
+.toolTip .top {
+	height:28px;
+}
+.toolTip .topmid {
+	height:28px;
+	width:382px;
+	float:left;
+}
+.toolTip .tpL {
+	float:left;
+	width:10px;
+	height:28px;
+}
+.toolTip .tpR {
+	float:left;
+	width:14px;
+	height:28px;
+}
+.toolTip .close {
+	float:right;
+	width:16px;
+	height:16px;
+}
+.toolTip .bodymain .cont {
+	min-height:114px;
+	margin:0 9px 0 3px;
+}
+.toolTip .bodymain ul {
+	padding:10px 15px 0px 15px;
+}
+.toolTip .bodymain li {
+	padding:5px 0px 5px 0px;
+	clear:both;
+	min-height:20px;
+}
+.toolTip .bodymain li h1 {
+	width:90px;
+	float:left;
+}
+.toolTip .bodymain li h2 {
+	float:left;
+	width:263px;
+}
+.toolTip .bot {
+	height:auto;
+}
+.toolTip .botL {
+	height:14px;
+	width:14px;
+	float:left;
+}
+.toolTip .botM {
+	width:378px;
+	float:left;
+}
+.toolTip .tip {
+	width:41px;
+	height:60px;
+	margin:auto;
+}
+.toolTip .botR {
+	height:14px;
+	width:14px;
+	float:left;
+}
+.toolTip .but {
+	width:182px;
+	padding:0px 0px 6px 0px;
+	margin:auto;
+}
+/*Tool Tip Structures Ends*/
+
+/*New One day Starts*/
+.head2 {
+	height:26px;
+}
+.head2 span {
+	margin:4px 4px 0px 4px;
+}
+.head2 .mid {
+	margin: 5px auto;
+	width:92%;
+	float:left;
+}
+.panel1day {
+	height: 711px;
+	overflow:auto;
+}
+.panel1day li.hours {
+	width:7%;
+	height:84px;
+}
+.panel1day li.hours span {
+	margin:10px;
+}
+.panel1day li {
+	float:left;
+	width:92.8%;
+	height:84px;
+}
+*+html .panel1day li {
+	float:left;
+	width:90.7%;
+	height:84px;
+}
+.panel1day li span {
+	height:20px;
+}
+.panel1day li span.last {
+	height:20px;
+}
+/*New One day Ends*/
+
+/*New Five Days Starts*/
+.panel5days {
+	height: 711px;
+	overflow:auto;
+	min-width:750px;
+}
+.panel5days li {
+	float:left;
+	width:18.4%;
+	height:84px;
+}
+*+html .panel5days li {
+	float:left;
+	width:18.05%;
+	height:84px;
+}
+.panel5days li.day1 {
+	width:90%;
+}
+.panel5days li span {
+	height:20px;
+}
+.panel5days li span.last {
+	height:20px;
+}
+.panel5days li.hours {
+	width:7%;
+	height:84px;
+}
+.panel5days li.hours span {
+	margin:10px;
+}
+/*New Five Days Ends*/
+
+/*New 7 Days Starts*/
+.panel7days {
+	height: 711px;
+	overflow:auto;
+	min-width:750px;
+}
+.panel7days li {
+	float:left;
+	width:13.13%;
+	height:84px;
+}
+
+*+html .panel7days li {
+	float:left;
+	width:12.90%;
+	height:84px;
+}
+.panel7days li.day1 {
+	width:90%;
+}
+.panel7days li span {
+	height:20px;
+}
+.panel7days li span.last {
+	height:20px;
+}
+.panel7days li.hours {
+	width:7%;
+	height:84px;
+}
+.panel7days li.hours span {
+	margin:10px;
+}
+/*New 7 Days Ends*/
+
+/*Footer Structures Starts*/
+.footer {
+	height:58px;
+	padding:26px 0px 0px 34px;
+}
+.footer span {
+	display:block;
+}
+/*Footer Structures Ends*/
