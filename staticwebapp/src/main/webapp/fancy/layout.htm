@@ -1,0 +1,87 @@
+[#ftl]
+<link href="${base}/../dandanakka-static/fancy/css/style.css" rel="stylesheet" type="text/css" />
+<link href="${base}/../dandanakka-static/theme/basic/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+<link href="${base}/../dandanakka-static/jquery-ui-themes/themes/blitzer/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+<link href="${base}/../dandanakka-static/theme/basic/css/uni-form.css" rel="stylesheet" type="text/css" />
+<link href="${base}/../dandanakka-static/theme/basic/css/ui.jqgrid.custom.css" rel="stylesheet" type="text/css" />
+<link href="${base}/../dandanakka-static/theme/basic/css/blue.uni-form.css" rel="stylesheet" type="text/css" />
+
+<div id="topheader">
+   <div class="topmenu_area">[@addLocales/] </div>
+   <div class="banner_textarea">
+   [#if user??]
+   
+     <p class="banner_head user">Welcome ${user.username}! &nbsp;| &nbsp;<a href="${base}/${application}/core/controlpanel">Control Panel</a> | &nbsp;<a href="${base}/j_spring_security_logout?application=${application}" class="user">Logout</a></p>
+     [#else]
+  		<p class="banner_head user"><a href="${base}/${application}/core/login">Login</a></p>
+  		[/#if]
+   </div>
+   <div class="search_menu_banner">
+     <div class="search_background">
+       <div class="searchname">Search</div>
+       <div class="searchbox">
+         <label>
+         <input name="textfield" type="text" class="searchtextbox" />
+         </label>
+       </div>
+       <div class="searchbox">
+         <div align="center"><a href="#" class="go">go</a></div>
+       </div>
+     </div>
+     <div class="menu_area">
+     [#list context.links.master as link]
+	
+  	<a href="${getUrl(link)}" class="addidea">${link.label}</a>
+  
+  [/#list]
+     
+     </div>
+   </div>
+ </div>
+ <div id="body_area">
+  ${content}
+  </div>
+ </div>
+ <div id="fotter">
+   <div id="fotter_1">
+     <div class="fotter_leftarea">
+       <div class="fotter_links">
+			[#if context.links.footer??]
+   [#list context.links.footer as link]
+	[#if link_index !=0] | [/#if]
+  <a  class="fotterlink" href="${getUrl(link)}">${link.label}</a>
+  [/#list]
+  [/#if]
+</div>
+
+      </div>
+     <div class="fotter_rightarea">
+       
+       <div class="fotter_copyrights">Copyright Information Goes Here. 
+        All Rights Reserved.</div>
+     </div>
+   </div>
+     </div>
+     
+ [#function getUrl link] [#if link.url??] [#return
+link.url] [#elseif link.page??] [#return
+base+'/${application}/core/page/view?pName='+link.page] [#else] [#return
+base+'/${application}/core/link/actions?lId='+link.id] [/#if]
+
+[/#function]
+
+[#macro addLocales]
+  [#local locales= context.locales] 
+ 
+  	[#if locales?? && locales?size >0 ] 
+  	 	[#local locales = locales + [ {"code":"en", "label":"English"}] /]
+	  	[#list locales as localeObj] 
+	  		[#if locale.language != localeObj.code] 
+	  			[@s.url id="url" includeParams="all"]
+					[@s.param name="request_locale"]${localeObj.code}[/@s.param] 
+				[/@s.url]
+				[@s.a href="${url}" cssClass="about"]${localeObj.label}[/@s.a] 
+			[/#if] 
+		[/#list] 
+	[/#if]
+[/#macro]
